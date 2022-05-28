@@ -30,6 +30,7 @@ defineProps({
         </div>
 
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+            <!-- 
             <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
                 <svg
                     viewBox="0 0 651 192"
@@ -180,6 +181,7 @@ defineProps({
                     Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})
                 </div>
             </div>
+            -->
         </div>
     </div>
 </template>

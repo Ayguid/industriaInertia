@@ -15,14 +15,15 @@ use Inertia\Inertia;
 |
 */
 
+//landing
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Landing', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('landing');
 
 Route::middleware([
     'auth:sanctum',
