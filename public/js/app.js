@@ -27933,7 +27933,7 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   "class": "max-w-7xl mx-auto sm:px-6 lg:px-8"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "bg-white overflow-hidden shadow-xl sm:rounded-lg"
-}, " 123123123123123123123123 ")])], -1
+}, " Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis vero deserunt itaque adipisci, ut velit quidem minus quo consectetur earum placeat, debitis ducimus veritatis distinctio? Necessitatibus molestiae exercitationem fugit debitis. ")])], -1
 /* HOISTED */
 );
 

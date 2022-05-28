@@ -1548,9 +1548,6 @@ select {
 .font-semibold {
   font-weight: 600;
 }
-.font-bold {
-  font-weight: 700;
-}
 .uppercase {
   text-transform: uppercase;
 }
@@ -1565,9 +1562,6 @@ select {
 }
 .leading-4 {
   line-height: 1rem;
-}
-.leading-none {
-  line-height: 1;
 }
 .tracking-widest {
   letter-spacing: 0.1em;
