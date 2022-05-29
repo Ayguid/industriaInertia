@@ -10,6 +10,13 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+/*
+mix.browserSync({
+    proxy: 'http://127.0.0.1:8000',
+
+    //open: false,
+});
+*/
 
 mix.js('resources/js/app.js', 'public/js').vue()
     .postCss('resources/css/app.css', 'public/css', [
@@ -22,4 +29,6 @@ mix.js('resources/js/app.js', 'public/js').vue()
 
 if (mix.inProduction()) {
     mix.version();
+} else {
+    mix.sourceMaps(false, "source-map");
 }

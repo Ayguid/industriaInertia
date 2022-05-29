@@ -3,7 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use App\Http\Controllers\EntityController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,4 +33,6 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+    Route::get('/entities', [EntityController::class, 'index'])->name('entities');
+    Route::get('/entities/create', [EntityController::class, 'create'])->name('createEntity');
 });
