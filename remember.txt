@@ -1,0 +1,10 @@
+
+Vue3 tree-select errors!!!! Vamos a tener que armar uno o buscar otro
+To remove this error until it is fixed, 
+find the vue3-treeselect.common.js file in your node_modules folder 
+and then comment out all lines that have "var h = this.$createElement;".
+There should be 27 of them as of this post.
+
+Tmb importar 
+import { Transition, TransitionGroup } from 'vue'//chanchada para arreglar los errores de vue3-treeslect
+de manera global

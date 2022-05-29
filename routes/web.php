@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\EntityController;
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,7 @@ use App\Http\Controllers\EntityController;
 */
 
 //landing
+/*
 Route::get('/', function () {
     return Inertia::render('Landing', [
         'canLogin' => Route::has('login'),
@@ -24,6 +26,11 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 })->name('landing');
+*/
+
+Route::get('/', [LandingController::class, 'index'])->name('landing');
+
+
 
 Route::middleware([
     'auth:sanctum',
