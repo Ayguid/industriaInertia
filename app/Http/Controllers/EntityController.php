@@ -15,10 +15,11 @@ class EntityController extends Controller
      */
     public function index(Request $request)
     {
+        $paginate = 4;
         //
         $user = auth()->user() ?? $request->user();
-        $userEntities = Entity::where('user_id', $user->id)->orWhere('created_by_user_id', $user->id)->where('user_id', false)->with('country', 'state', 'city')->get(); //las que somos dueños
-        return Inertia::render('Entities', [
+        $userEntities = Entity::where('user_id', $user->id)->orWhere('created_by_user_id', $user->id)->where('user_id', false)->with('country', 'state', 'city')->paginate($paginate); //las que somos dueños
+        return Inertia::render('UserEntities', [
             'user_entities' => $userEntities
         ]);
     }
@@ -54,7 +55,17 @@ class EntityController extends Controller
      */
     public function show(Entity $entity)
     {
-        //
+        $user_id = auth()->user()->id ?? null;
+        //  
+        $ent = $entity::where('id', $entity->id)->withCount([
+            'bookmarks',
+            'bookmarks as bookmarked' => function ($q) use ($user_id) {
+                $q->where('user_id', $user_id);
+            }
+        ])->withCasts(['bookmarks' => 'boolean']);
+        return Inertia::render('EntityProfile', [
+            'entity' => $ent->first()
+        ]);
     }
 
     /**

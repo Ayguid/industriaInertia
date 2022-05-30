@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\UserBookmark;
 use Illuminate\Http\Request;
+use App\Models\Entity;
+use App\Models\User;
 
 class UserBookmarkController extends Controller
 {
@@ -12,9 +15,36 @@ class UserBookmarkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
+        $user = auth()->user();
+        $paginate = 8;
         //
+        $bookmarks = $user->bookmarks()->withCount([
+            'bookmarks',
+            'bookmarks as bookmarked' => function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            }
+        ])->withCasts(['bookmarked' => 'boolean'])->paginate($paginate);
+
+        if (request()->input('page') > $bookmarks->lastPage()) { // si el paginator rompe lo mandamos a la ruta inicial
+            return redirect()->route('userBookmarks', $user->id);
+        };
+        //
+        return Inertia::render('UserBookmarks', [
+            'user_bookmarks' => $bookmarks
+        ]);
+    }
+
+
+
+
+    public function toggle(Entity $entity)
+    {
+        $entity->bookmarks()->toggle(auth()->id());
+        return redirect()->back();
     }
 
     /**

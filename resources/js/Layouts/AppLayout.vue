@@ -8,7 +8,7 @@ import JetDropdown from "@/Jetstream/Dropdown.vue";
 import JetDropdownLink from "@/Jetstream/DropdownLink.vue";
 import JetNavLink from "@/Jetstream/NavLink.vue";
 import JetResponsiveNavLink from "@/Jetstream/ResponsiveNavLink.vue";
-
+import ThemeSwitcher from "@/Components/ThemeSwitcher.vue";
 defineProps({
     title: String,
 });
@@ -33,13 +33,17 @@ const logout = () => {
 </script>
 
 <template>
-    <div>
+    <div class="">
         <Head :title="title" />
 
         <JetBanner />
 
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+        <div
+            class="min-h-screen bg-gray-100 dark:bg-gray-800 dark:border-gray-700"
+        >
+            <nav
+                class="bg-white border-b border-gray-100 dark:bg-gray-800 dark:border-gray-700"
+            >
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -61,17 +65,29 @@ const logout = () => {
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
                             >
                                 <jet-nav-link
+                                    class="dark:text-white"
                                     :href="route('dashboard')"
                                     :active="route().current('dashboard')"
                                 >
                                     Home
                                 </jet-nav-link>
                                 <jet-nav-link
+                                    class="dark:text-white"
+                                    :href="route('userBookmarks')"
+                                    :active="route().current('userBookmarks')"
+                                >
+                                    User Bookmarks
+                                </jet-nav-link>
+                                <jet-nav-link
+                                    class="dark:text-white"
                                     :href="route('entities')"
                                     :active="route().current('entities')"
                                 >
                                     Entities
                                 </jet-nav-link>
+                                <div class="inline-flex items-center">
+                                    <ThemeSwitcher />
+                                </div>
                             </div>
 
                             <!-- if user is auth end-->
@@ -561,7 +577,10 @@ const logout = () => {
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white shadow" v-if="$slots.header">
+            <header
+                class="bg-white shadow dark:bg-gray-800 dark:border-gray-700"
+                v-if="$slots.header"
+            >
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <slot name="header"></slot>
                 </div>

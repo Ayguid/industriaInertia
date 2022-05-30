@@ -19,7 +19,7 @@
     @inertiaHead
 </head>
 
-<body class="font-sans antialiased">
+<body id="themeDiv" class="font-sans antialiased">
     @inertia
 
     @env ('local')
@@ -28,5 +28,10 @@
     -->
     @endenv
 </body>
+<script defer>
+    if (localStorage.getItem("darkMode") == "true") {
+        document.getElementById("themeDiv").classList.add("dark");
+    }
+</script>
 
 </html>

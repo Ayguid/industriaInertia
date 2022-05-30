@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\EntityController;
+use App\Http\Controllers\UserBookmarkController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,8 +30,8 @@ Route::get('/', function () {
 */
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
-
-
+//muestra un perfil de entidad
+Route::get('/entity/{entity:username}', [EntityController::class, 'show'])->name('entityProfile');
 
 Route::middleware([
     'auth:sanctum',
@@ -40,6 +41,10 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-    Route::get('/entities', [EntityController::class, 'index'])->name('entities');
-    Route::get('/entities/create', [EntityController::class, 'create'])->name('createEntity');
+    //muestra los user entities
+    Route::get('user/entities', [EntityController::class, 'index'])->name('entities');
+    //muestra el form para crear/editar
+    Route::get('user/entities/create', [EntityController::class, 'create'])->name('createEntity');
+    Route::get('user/bookmarks', [UserBookmarkController::class, 'index'])->name('userBookmarks');
+    Route::post('entities/bookmark/{entity}', [UserBookmarkController::class, 'toggle'])->name('bookmarkEntity');
 });
