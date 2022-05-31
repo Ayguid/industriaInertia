@@ -20,7 +20,7 @@
 
                 Father--<Link
                     v-for="(cat, i) in category.childs"
-                    class="bg-indigo-400 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full mr-2"
+                    class="bg-indigo-400 hover:bg-indigo-200 text-white font-bold py-2 px-4 rounded-full mr-2"
                     :key="i"
                     :href="route('categoryShow', cat.id)"
                     method="get"

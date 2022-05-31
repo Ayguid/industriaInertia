@@ -1,6 +1,6 @@
 <template>
     <Link
-        class="bg-indigo-400 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full mr-2 inline"
+        class="bg-indigo-200 hover:bg-indigo-100 text-white font-bold py-2 px-4 rounded-full mr-2 inline"
         :href="route('categoryShow', category.id)"
         method="get"
         as="button"
