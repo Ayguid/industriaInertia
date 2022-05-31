@@ -1,3 +1,5 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+/*hide scrollbar*/
+body::-webkit-scrollbar { width: 0 !important }

@@ -64,26 +64,14 @@ const logout = () => {
                                 v-if="$page.props.user"
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
                             >
-                                <jet-nav-link
-                                    class="dark:text-white"
-                                    :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
-                                >
-                                    Dashboard
+                                <jet-nav-link class="dark:text-white">
+                                    Users
                                 </jet-nav-link>
-                                <jet-nav-link
-                                    class="dark:text-white"
-                                    :href="route('userBookmarks')"
-                                    :active="route().current('userBookmarks')"
-                                >
-                                    User Bookmarks
+                                <jet-nav-link class="dark:text-white">
+                                    Categories
                                 </jet-nav-link>
-                                <jet-nav-link
-                                    class="dark:text-white"
-                                    :href="route('entities')"
-                                    :active="route().current('entities')"
-                                >
-                                    User Entities
+                                <jet-nav-link class="dark:text-white">
+                                    Entities
                                 </jet-nav-link>
                                 <div class="inline-flex items-center">
                                     <ThemeSwitcher />

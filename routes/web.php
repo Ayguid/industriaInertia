@@ -6,6 +6,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\EntityController;
 use App\Http\Controllers\UserBookmarkController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +34,7 @@ Route::get('/', function () {
 Route::get('/', [LandingController::class, 'index'])->name('landing');
 //muestra un perfil de entidad
 Route::get('/entity/{entity:username}', [EntityController::class, 'show'])->name('entityProfile');
+Route::get('/category/{category}', [CategoryController::class, 'show'])->name('categoryShow');
 
 Route::middleware([
     'auth:sanctum',
@@ -47,4 +50,12 @@ Route::middleware([
     Route::get('user/entities/create', [EntityController::class, 'create'])->name('createEntity');
     Route::get('user/bookmarks', [UserBookmarkController::class, 'index'])->name('userBookmarks');
     Route::post('entities/bookmark/{entity}', [UserBookmarkController::class, 'toggle'])->name('bookmarkEntity');
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('adminDashboard');
 });

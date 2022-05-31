@@ -14,32 +14,51 @@ class LandingController extends Controller
     {
         //
         $catIds = [];
+        $locationsIds = [];
         $user_id = auth()->user()->id  ?? null;
         $paginate = 5;
-        //
+        /////////////////////// settings BEFORE  query ///////////////
+        // ex catsinrequest locations=[{id:1,name:"algo"},{id:1,name:"algo"}] 
+        if (request()->exists('locations')) {
+            //armamos un array con los ids de el array de objetos que llego para locations
+            $locationsIds = array_column(json_decode(request()->get('locations')), 'id');
+        }
+        // ex catsinrequest categories=[1,null, 34, null] 
         if (request()->exists('categories')) {
             $catIds = json_decode(request()->get('categories'));
-            $catIds = array_map(function ($v) { //sacamos los null values, para que no rompa el reduce
+            //sacamos los null values, para que no rompa el reduce
+            $catIds = array_map(function ($v) {
                 return (is_null($v)) ? [] : $v;
             }, $catIds);
-            $catIds = array_reduce($catIds, 'array_merge', array()); //aplanamos el array a una dimension
+            //aplanamos el array a una dimension
+            $catIds = array_reduce($catIds, 'array_merge', array());
         }
-        if (count($catIds) > 0) { // si hay categorias en el filter
+
+        ///////////////////////////////////////////////////////////////
+        /////////////// conditions of query ///////////////////////////////////////////////////////////////////////////
+        if (count($catIds) == 0 && count($locationsIds) > 0) { //si hay locations y  no hay categories 
+            $entities = Entity::whereIn('country_id', $locationsIds)->orWhereIn('state_id', $locationsIds)->orWhereIn('city_id', $locationsIds);
+        } else if (count($catIds) > 0 && count($locationsIds) == 0) { // si hay categorias en el filter, y no hay locations
             $entities = Entity::whereHas('categories',  function ($query) use ($catIds) {
                 return $query->whereIn('category_id', $catIds)->orWhereIn('parent_id', $catIds);
-            })->with(['user', 'categories']);
-        } else { //sino hay nada
-            $entities = Entity::with(['user', 'categories']);
+            });
+        } else if (count($catIds) > 0 && count($locationsIds) > 0) { //si hay categories y locations
+            $entities = Entity::whereHas('categories',  function ($query) use ($catIds) {
+                return $query->whereIn('category_id', $catIds)->orWhereIn('parent_id', $catIds);
+            })->whereIn('country_id', $locationsIds)->orWhereIn('state_id', $locationsIds)->orWhereIn('city_id', $locationsIds);
+        } else if (count($catIds) == 0 && count($locationsIds) == 0) { //hay nada de nada de nada
+            $entities = new Entity(); //weird...
         }
-        //las categorias para el filtro
-        $parent_categories = Category::where('parent_id', null)->with('children')->get();
-        //appendeamos las relations/methods que queremos -->
-        $entities = $entities->withCount([
+        //appendeamos las relations/methods que queremos START-->
+        $entities = $entities->with(['user', 'categories', 'country', 'state', 'city'])->withCount([
             'bookmarks',
             'bookmarks as bookmarked' => function ($q) use ($user_id) {
                 $q->where('user_id', $user_id);
             }
         ])->withCasts(['bookmarked' => 'boolean'])->paginate($paginate)->appends(request()->query()); //el appends request query es para que nos vuelvan los parametros del filtro que fueron por get request
+        //appendeamos las relations/methods que queremos END-->
+        //las categorias para el filtro
+        $parent_categories = Category::where('parent_id', null)->with('children')->get();
         // return final
         return Inertia::render('Landing', [
             'query_params' => request()->query(),

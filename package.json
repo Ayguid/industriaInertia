@@ -28,6 +28,7 @@
         "vue-loader": "^17.0.0"
     },
     "dependencies": {
+        "vue-select": "^4.0.0-beta.3",
         "vue3-treeselect": "^0.1.10"
     }
 }

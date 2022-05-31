@@ -1,15 +1,15 @@
 <script setup>
-import AppLayout from "@/Layouts/AppLayout.vue";
+import AdminLayout from "@/Layouts/AdminLayout.vue";
 import home from "@/components/home.vue";
 </script>
 
 <template>
-    <AppLayout title="Dashboard">
+    <AdminLayout title="Dashboard">
         <template #header>
             <h2
                 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white"
             >
-                Dashboard
+                Admin Dashboard
             </h2>
         </template>
 
@@ -20,5 +20,5 @@ import home from "@/components/home.vue";
                 </div>
             </div>
         </div>
-    </AppLayout>
+    </AdminLayout>
 </template>

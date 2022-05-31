@@ -1,5 +1,5 @@
 <template>
-    <div @click="$emit('bookMark')">
+    <div @click="bookMarkEntity">
         <div v-if="!bookmarked">
             <button>
                 <svg
@@ -40,6 +40,7 @@ export default {
     //props: ['posts'],
     props: {
         bookmarked: Boolean,
+        entityId: [Number, String],
     },
     components: {
         //Welcome,
@@ -47,7 +48,20 @@ export default {
     data() {
         return {};
     },
-    methods: {},
+    methods: {
+        bookMarkEntity() {
+            this.$inertia
+                .form(
+                    {},
+                    {
+                        resetOnSuccess: true,
+                    }
+                )
+                .post(route("bookmarkEntity", this.entityId), {
+                    preserveScroll: true,
+                });
+        },
+    },
     mounted() {},
 };
 </script>

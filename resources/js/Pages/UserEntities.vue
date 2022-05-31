@@ -14,12 +14,12 @@ defineProps({
             <h2
                 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white"
             >
-                Entities
+                User Entities
             </h2>
         </template>
-        <div class="py-12">
+        <div class="py-4">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="mb-12">
+                <div class="mb-4">
                     <jet-nav-link
                         class="dark:text-white"
                         :href="route('createEntity')"

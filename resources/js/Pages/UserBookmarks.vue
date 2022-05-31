@@ -19,17 +19,13 @@ defineProps({
             </h2>
         </template>
 
-        <div class="py-12">
+        <div class="py-4">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div
                     class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4"
                 >
                     <div v-for="(entity, i) in user_bookmarks.data" :key="i">
-                        <EntityCard
-                            :entity="entity"
-                            :bookmarkBtn="true"
-                            :bookMarkEntity="bookMarkEntity"
-                        />
+                        <EntityCard :entity="entity" :bookmarkBtn="true" />
                     </div>
                 </div>
                 <pagination class="mt-6" :links="user_bookmarks.links" />
@@ -56,21 +52,6 @@ export default {
         return {};
     },
     computed: {},
-    methods: {
-        bookMarkEntity(id) {
-            const okConfirm = confirm("sure");
-            if (!okConfirm) return;
-            this.$inertia
-                .form(
-                    {},
-                    {
-                        resetOnSuccess: true,
-                    }
-                )
-                .post(route("bookmarkEntity", id), {
-                    preserveScroll: true,
-                });
-        },
-    },
+    methods: {},
 };
 </script>

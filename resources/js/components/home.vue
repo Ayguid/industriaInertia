@@ -8,13 +8,10 @@ import JetApplicationLogo from "@/Jetstream/ApplicationLogo.vue";
             <div class="text-2xl">Welcome to your Aarbor application!</div>
 
             <div class="mt-6 text-gray-500">
-                Laravel Jetstream provides a beautiful, robust starting point
-                for your next Laravel application. Laravel is designed to help
-                you build your application using a development environment that
-                is simple, powerful, and enjoyable. We believe you should love
-                expressing your creativity through programming, so we have spent
-                time carefully crafting the Laravel ecosystem to be a breath of
-                fresh air. We hope you love it.
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Perspiciatis molestias necessitatibus facere perferendis
+                deleniti nam quidem laudantium, ut id, est ratione officiis
+                alias ducimus sapiente minima facilis. Veritatis, quam placeat!
             </div>
         </div>
 
@@ -91,16 +88,17 @@ import JetApplicationLogo from "@/Jetstream/ApplicationLogo.vue";
 
                 <div class="ml-12">
                     <div class="mt-2 text-sm text-gray-500">
-                        Laracasts offers thousands of video tutorials on
-                        Laravel, PHP, and JavaScript development. Check them
-                        out, see for yourself, and massively level up your
-                        development skills in the process.
+                        Lorem ipsum dolor sit amet consectetur, adipisicing
+                        elit. Perspiciatis molestias necessitatibus facere
+                        perferendis deleniti nam quidem laudantium, ut id, est
+                        ratione officiis alias ducimus sapiente minima facilis.
+                        Veritatis, quam placeat!
                     </div>
 
                     <div
                         class="mt-3 flex items-center text-sm font-semibold text-indigo-700"
                     >
-                        <div>Start watching Laracasts</div>
+                        <div>Start</div>
 
                         <div class="ml-1 text-indigo-500">
                             <svg
@@ -141,11 +139,11 @@ import JetApplicationLogo from "@/Jetstream/ApplicationLogo.vue";
 
                 <div class="ml-12">
                     <div class="mt-2 text-sm text-gray-500">
-                        Laravel Jetstream is built with Tailwind, an amazing
-                        utility first CSS framework that doesn't get in your
-                        way. You'll be amazed how easily you can build and
-                        maintain fresh, modern designs with this wonderful
-                        framework at your fingertips.
+                        Lorem ipsum dolor sit amet consectetur, adipisicing
+                        elit. Perspiciatis molestias necessitatibus facere
+                        perferendis deleniti nam quidem laudantium, ut id, est
+                        ratione officiis alias ducimus sapiente minima facilis.
+                        Veritatis, quam placeat!
                     </div>
                 </div>
             </div>
@@ -168,17 +166,17 @@ import JetApplicationLogo from "@/Jetstream/ApplicationLogo.vue";
                     <div
                         class="ml-4 text-lg text-gray-600 leading-7 font-semibold"
                     >
-                        Authentication
+                        asdasdasdasd
                     </div>
                 </div>
 
                 <div class="ml-12">
                     <div class="mt-2 text-sm text-gray-500">
-                        Authentication and registration views are included with
-                        Laravel Jetstream, as well as support for user email
-                        verification and resetting forgotten passwords. So,
-                        you're free to get started what matters most: building
-                        your application.
+                        Lorem ipsum dolor sit amet consectetur, adipisicing
+                        elit. Perspiciatis molestias necessitatibus facere
+                        perferendis deleniti nam quidem laudantium, ut id, est
+                        ratione officiis alias ducimus sapiente minima facilis.
+                        Veritatis, quam placeat!
                     </div>
                 </div>
             </div>

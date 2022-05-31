@@ -49,13 +49,13 @@
                 </Link>
                 <BookmarkIcon
                     v-if="bookmarkBtn"
-                    @bookMark="bookMarkEntity(entity.id)"
                     :bookmarked="entity.bookmarked"
+                    :entityId="entity.id"
                 />
             </div>
             <div class="">
                 <h6
-                    class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+                    class="text-xl font-bold tracking-tight text-gray-900 dark:text-white"
                 >
                     Categories:
                 </h6>
@@ -66,6 +66,18 @@
                 >
                     {{ cat.name }}
                 </span>
+            </div>
+            <div>
+                <h6
+                    class="text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+                >
+                    Location:
+                </h6>
+                <div v-if="entity.country">
+                    Country: {{ entity.country.name }}
+                </div>
+                <div v-if="entity.state">State: {{ entity.state.name }}</div>
+                <div v-if="entity.city">City: {{ entity.city.name }}</div>
             </div>
         </div>
     </div>
@@ -80,7 +92,6 @@ export default defineComponent({
     props: {
         entity: Object,
         bookmarkBtn: Boolean,
-        bookMarkEntity: Function,
     },
     components: {
         BookmarkIcon,

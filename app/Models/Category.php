@@ -18,6 +18,10 @@ class Category extends Model
     {
         return $this->belongsTo($this, 'parent_id');
     }
+    public function grandParent()
+    {
+        return $this->parent()->with('grandParent')->orderBy('name');
+    }
 
     public function childs()
     {

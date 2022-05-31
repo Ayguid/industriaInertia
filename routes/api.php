@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PublicApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//Public
+Route::get('/locations', [PublicApiController::class, 'locations']);
+Route::get('/fetchCountries', [PublicApiController::class, 'fetchCountries']);
+Route::get('/fetchStates', [PublicApiController::class, 'fetchStates']);
+Route::get('/fetchCities', [PublicApiController::class, 'fetchCities']);

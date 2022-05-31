@@ -62,7 +62,7 @@ class EntityController extends Controller
             'bookmarks as bookmarked' => function ($q) use ($user_id) {
                 $q->where('user_id', $user_id);
             }
-        ])->withCasts(['bookmarks' => 'boolean']);
+        ])->withCasts(['bookmarked' => 'boolean'])->with(['country', 'state', 'city']);
         return Inertia::render('EntityProfile', [
             'entity' => $ent->first()
         ]);

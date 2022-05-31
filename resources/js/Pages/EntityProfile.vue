@@ -1,3 +1,4 @@
+<!--
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import BookmarkIcon from "@/Components/BookmarkIcon";
@@ -6,7 +7,7 @@ defineProps({
     entity: Object,
 });
 </script>
-
+-->
 <template>
     <AppLayout :title="entity.username">
         <template #header>
@@ -17,7 +18,23 @@ defineProps({
             </h2>
         </template>
 
-        <div class="py-12">
+        <div class="py-4">
+            <div v-if="userOwns" class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
+                <div class="bg-white shadow sm:rounded-lg">
+                    <post-form />
+                    <!--
+                        <infinite-scroll :loadMore="loadMorePosts">
+                            <post-card
+                                v-for="post in myPostsAndFollowingPosts.data"
+                                :key="post.id"
+                                :postData="post"
+                                class=""
+                            ></post-card>
+                        </infinite-scroll>
+                        -->
+                </div>
+            </div>
+
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div
                     class="bg-white shadow-xl sm:rounded-lg p-4 dark:bg-gray-800 dark:border-gray-700"
@@ -125,7 +142,10 @@ defineProps({
                             <dd
                                 class="text-indigo-600 flex items-center dark:text-indigo-400"
                             >
-                                <BookmarkIcon :bookmarked="entity.bookmarked" />
+                                <BookmarkIcon
+                                    :entityId="entity.id"
+                                    :bookmarked="entity.bookmarked"
+                                />
                                 <span
                                     >{{ entity.bookmarks_count }}
                                     <span class="text-slate-400 font-normal"
@@ -164,7 +184,18 @@ defineProps({
                                         d="M14 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"
                                     />
                                 </svg>
-                                Collingwood, Ontario
+
+                                <div>
+                                    <div v-if="entity.country">
+                                        Country: {{ entity.country.name }}
+                                    </div>
+                                    <div v-if="entity.state">
+                                        State: {{ entity.state.name }}
+                                    </div>
+                                    <div v-if="entity.city">
+                                        City: {{ entity.city.name }}
+                                    </div>
+                                </div>
                             </dd>
                         </dl>
                         <div
@@ -196,13 +227,17 @@ defineProps({
                             >
                                 Categories:
                             </h6>
-                            <button
-                                class="bg-indigo-400 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full mr-2"
+
+                            <Link
                                 v-for="(cat, i) in entity.categories"
+                                class="bg-indigo-400 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full mr-2"
                                 :key="i"
+                                :href="route('categoryShow', cat.id)"
+                                method="get"
+                                as="button"
+                                type="button"
+                                >{{ cat.name }}</Link
                             >
-                                {{ cat.name }}
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -210,3 +245,26 @@ defineProps({
         </div>
     </AppLayout>
 </template>
+<script>
+import AppLayout from "@/Layouts/AppLayout.vue";
+import BookmarkIcon from "@/Components/BookmarkIcon";
+import PostForm from "@/Components/Forms/PostForm";
+import { Link } from "@inertiajs/inertia-vue3";
+export default {
+    props: {
+        entity: Object,
+    },
+    components: {
+        AppLayout,
+        BookmarkIcon,
+        PostForm,
+        Link,
+    },
+    computed: {
+        userOwns() {
+            return this.entity.user_id == this.$page.props.user.id;
+        },
+    },
+    methods: {},
+};
+</script>
