@@ -4,10 +4,13 @@
             <h2
                 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white"
             >
-                Category
+                Category: {{ category.name }}
             </h2>
         </template>
 
+        <!-- -->
+        <CategoryBreadcrumbs :category="category"/>
+        <!-- -->
         <div class="py-4">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-gray overflow-hidden shadow-xl sm:rounded-lg">
@@ -36,6 +39,7 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { Link } from "@inertiajs/inertia-vue3";
 import CategoryPill from "@/Components/CategoryPill";
+import CategoryBreadcrumbs from "@/Components/CategoryBreadcrumbs";
 export default {
     props: {
         category: Object,
@@ -44,6 +48,7 @@ export default {
         AppLayout,
         Link,
         CategoryPill,
+        CategoryBreadcrumbs
     },
 };
 </script>

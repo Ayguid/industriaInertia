@@ -31,7 +31,7 @@ class EntityFactory extends Factory
             //'state' => $this->faker->state(),
             //'city' => $this->faker->city(),
             'street' => $this->faker->streetName(),
-            'stree_number' => $this->faker->buildingNumber(),
+            'street_number' => $this->faker->buildingNumber(),
             'postal_code' => $this->faker->postcode(),
             'phone' => $this->faker->phoneNumber(),
             'cellphone' => $this->faker->e164PhoneNumber(),

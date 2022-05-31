@@ -8,3 +8,8 @@ There should be 27 of them as of this post.
 Tmb importar 
 import { Transition, TransitionGroup } from 'vue'//chanchada para arreglar los errores de vue3-treeslect
 de manera global
+
+
+free tailwind components
+https://merakiui.com/components/#
+https://tailgrids.com/components
