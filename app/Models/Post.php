@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Entity;
 
 class Post extends Model
 {
@@ -27,5 +29,11 @@ class Post extends Model
     public function media()
     {
         return $this->morphMany(Media::class, 'model');
+    }
+
+    //
+    public function entityAuthor()
+    {
+        return $this->belongsTo(Entity::class, 'model_id')->select('id', 'username');
     }
 }

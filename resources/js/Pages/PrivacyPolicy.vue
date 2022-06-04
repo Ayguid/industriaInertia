@@ -1,6 +1,5 @@
 <script setup>
-import { Head } from '@inertiajs/inertia-vue3';
-import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue';
+import JetAuthenticationCardLogo from "@/Jetstream/AuthenticationCardLogo.vue";
 
 defineProps({
     policy: String,
@@ -17,7 +16,10 @@ defineProps({
                     <JetAuthenticationCardLogo />
                 </div>
 
-                <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose" v-html="policy" />
+                <div
+                    class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose"
+                    v-html="policy"
+                />
             </div>
         </div>
     </div>

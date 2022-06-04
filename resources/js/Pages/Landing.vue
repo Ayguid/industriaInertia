@@ -1,89 +1,82 @@
 <template>
-    <AppLayout title="Landing">
-        <template #header>
-            <h2
-                class="font-semibold text-xl text-gray-800 leading-tight dark:text-white"
+    <Head>
+        <title>Landing</title>
+        <meta name="description" content="Your page description" />
+    </Head>
+    <h2
+        class="font-semibold text-xl text-gray-800 leading-tight dark:text-white"
+    >
+        Aarvor -- Landing
+    </h2>
+
+    <div class="py-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <!--Filter start-->
+            <div
+                class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4"
             >
-                Aarbor -- Landing
-            </h2>
-        </template>
-
-        <div class="py-4">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <!--Filter start-->
-                <div
-                    class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4"
-                >
-                    <!--Categories Start-->
-                    <div
-                        class="mb-2"
-                        v-for="(category, i) in categories"
-                        :key="i"
+                <!--Categories Start-->
+                <div class="mb-2" v-for="(category, i) in categories" :key="i">
+                    <treeselect
+                        :placeholder="category.name"
+                        :multiple="true"
+                        :options="[category]"
+                        :normalizer="normalizer"
+                        v-model="selectedCats[i]"
+                    />
+                </div>
+                <!--Categories End-->
+                <!--Location Start-->
+                <div>
+                    <vSelect
+                        class="dark:bg-indigo-500 rounded"
+                        @search="getLocations"
+                        :options="locationOptions"
+                        label="name"
+                        :loading="loadingLocations"
+                        v-model="selectedLocations"
+                        :multiple="true"
+                        :filterable="false"
                     >
-                        <treeselect
-                            :placeholder="category.name"
-                            :multiple="true"
-                            :options="[category]"
-                            :normalizer="normalizer"
-                            v-model="selectedCats[i]"
-                        />
-                    </div>
-                    <!--Categories End-->
-                    <!--Location Start-->
-                    <div>
-                        <vSelect
-                            class="dark:bg-indigo-500 rounded"
-                            @search="getLocations"
-                            :options="locationOptions"
-                            label="name"
-                            :loading="loadingLocations"
-                            v-model="selectedLocations"
-                            :multiple="true"
-                            :filterable="false"
-                        >
-                            <template #option="option">
-                                <span v-if="option.parent" class="text-gray-400"
-                                    >{{ abbreviate(option.parent.name) }}-
-                                </span>
-                                {{ option.name }}
-                            </template>
-                            <template #selected-option="option">
-                                <span v-if="option.parent" class="text-gray-400"
-                                    >{{ abbreviate(option.parent.name) }}-
-                                </span>
-                                {{ option.name }}
-                            </template>
-                            <template
-                                #no-options="{ search, searching, loading }"
-                            >
-                                Search more specifically
-                            </template>
-                        </vSelect>
-                    </div>
-                    <!--Location End-->
+                        <template #option="option">
+                            <span v-if="option.parent" class="text-gray-400"
+                                >{{ abbreviate(option.parent.name) }}-
+                            </span>
+                            {{ option.name }}
+                        </template>
+                        <template #selected-option="option">
+                            <span v-if="option.parent" class="text-gray-400"
+                                >{{ abbreviate(option.parent.name) }}-
+                            </span>
+                            {{ option.name }}
+                        </template>
+                        <template #no-options="{ search, searching, loading }">
+                            Search more specifically
+                        </template>
+                    </vSelect>
                 </div>
-                <!--Filter end-->
-                <!--Paginator Start-->
-                <div class="mb-4 flex justify-center">
-                    <pagination :links="entities.links" />
-                </div>
-                <!--Paginator End-->
-
-                <!--Entities Start-->
-                <div
-                    class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4"
-                >
-                    <div v-for="(entity, i) in entities.data" :key="i">
-                        <EntityCard :entity="entity" :bookmarkBtn="true" />
-                    </div>
-                </div>
-                <!--Entities End-->
+                <!--Location End-->
             </div>
+            <!--Filter end-->
+            <!--Paginator Start-->
+            <div class="mb-4 flex justify-center">
+                <pagination :links="entities.links" />
+            </div>
+            <!--Paginator End-->
+
+            <!--Entities Start-->
+            <div
+                class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4"
+            >
+                <div v-for="(entity, i) in entities.data" :key="i">
+                    <EntityCard :entity="entity" />
+                </div>
+            </div>
+            <!--Entities End-->
         </div>
-    </AppLayout>
+    </div>
 </template>
 <script>
-import AppLayout from "@/Layouts/AppLayout.vue";
 import EntityCard from "@/Components/EntityCard.vue";
 import Pagination from "@/Components/Pagination.vue";
 import vSelect from "vue-select";
@@ -101,7 +94,6 @@ export default {
         query_params: Object,
     },
     components: {
-        AppLayout,
         Treeselect,
         EntityCard,
         Pagination,

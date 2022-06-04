@@ -7,7 +7,8 @@ import JetInput from "@/Jetstream/Input.vue";
 import JetCheckbox from "@/Jetstream/Checkbox.vue";
 import JetLabel from "@/Jetstream/Label.vue";
 import JetValidationErrors from "@/Jetstream/ValidationErrors.vue";
-
+import CategoryItem from "@/Components/Forms/CategoryItem.vue";
+import { computed } from "vue";
 const form = useForm({
     id: null,
     name: "",
@@ -21,6 +22,38 @@ const form = useForm({
     country_id: "",
     state_id: "",
     city_id: "",
+    categories: [],
+});
+const props = defineProps({
+    edit: Boolean,
+    categories: Array,
+});
+
+const data = {
+    mainCatsLimit: 2, // 7 to test
+    childLimit: 2,
+};
+
+const flatFormCategories = computed(() => {
+    return form.categories;
+});
+
+const categories_list = computed(() => {
+    let categoriesArranged;
+    if (
+        form.categories.filter((f) => !f.parent_id).length == data.mainCatsLimit
+    ) {
+        // main permited feelings
+        var activeIds = form.categories.map((a) => a.id); //array con los ids de los feelings seleccionados en el form
+        categoriesArranged = props.categories.filter(({ id }) =>
+            activeIds.includes(id)
+        ); // feelings con esos ids,,
+    } else {
+        //all main feelings
+        categoriesArranged = props.categories;
+    }
+    return categoriesArranged;
+    //return this.$store.state.baseFeelings
 });
 /*
 const submit = () => {
@@ -28,8 +61,56 @@ const submit = () => {
         onFinish: () => form.reset("password", "password_confirmation"),
     });
 };*/
+const addToForm = (obj) => {
+    //if(obj.parent_id)return
+    //console.log("Master emit received");
+    const found = form.categories.find((cat) => cat.id == obj.id);
+
+    if (found) {
+        //saca al padre y a sus hijos
+        form.categories = form.categories.filter((cat) => cat.id != found.id);
+        recursiveChildDelete(found);
+    } else {
+        form.categories.push(obj);
+    }
+};
+
+const recursiveChildDelete = (obj) => {
+    // encontrar a todos mis hijos y nietos y borrarlos
+    for (var i = form.categories.length - 1; i >= 0; --i) {
+        if (form.categories[i].parent_id == obj.id) {
+            const x = form.categories[i];
+            form.categories.splice(i, 1);
+            if (x.parent_id) {
+                recursiveChildDelete(x);
+            }
+        }
+    }
+};
+
+const flat = (array) => {
+    // aplanamos el array de cats en el form
+    var result = [];
+    array.forEach(function (a) {
+        result.push(a);
+        if (Array.isArray(a.children)) {
+            result = result.concat(flat(a.children));
+        }
+    });
+    return result;
+};
 </script>
 <template>
+    <div v-for="category in categories_list" :key="category.id">
+        <CategoryItem
+            :category="category"
+            @selected_category="addToForm($event)"
+            :list="flatFormCategories"
+            :childLimit="data.childLimit"
+        />
+    </div>
+    <pre>{{ form }}</pre>
+    <!--
     <form class="w-full">
         <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -145,4 +226,5 @@ const submit = () => {
             </div>
         </div>
     </form>
+    -->
 </template>

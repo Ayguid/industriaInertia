@@ -1,5 +1,47 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+                       
 /*hide scrollbar*/
 body::-webkit-scrollbar { width: 0 !important }
+
+
+html {
+    scroll-behavior: smooth;
+}
+blockquote {
+    border-left: 4px solid #ccc;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-left: 16px;
+}
+.ql-size-huge{
+    font-size: 1.5rem;
+}
+.ql-size-large{
+    font-size: 1.5rem;
+}
+.ql-size-normal{
+    font-size: 13px;
+}
+.ql-size-small{
+    font-size:  0.75em;
+    white-space: pre-line;
+}
+.ql-align-center{
+    text-align: center;
+}
+.ql-align-right {
+    text-align: right;
+}
+.ql-align-left {
+    text-align: left;
+}
+/**/
+#backToTop {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+}

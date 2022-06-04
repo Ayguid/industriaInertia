@@ -50,7 +50,7 @@ const logout = () => {
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('landing')">
+                                <Link :href="route('admin.dashboard')">
                                     <jet-application-mark
                                         class="block h-9 w-auto"
                                     />
@@ -64,14 +64,35 @@ const logout = () => {
                                 v-if="$page.props.user"
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
                             >
-                                <jet-nav-link class="dark:text-white">
-                                    Users
-                                </jet-nav-link>
-                                <jet-nav-link class="dark:text-white">
+                                <jet-nav-link
+                                    class="dark:text-white"
+                                    :href="route('admin.categories')"
+                                    :active="
+                                        route().current('admin.categories')
+                                    "
+                                >
                                     Categories
                                 </jet-nav-link>
-                                <jet-nav-link class="dark:text-white">
+                                <jet-nav-link
+                                    class="dark:text-white"
+                                    :href="route('admin.users')"
+                                    :active="route().current('admin.users')"
+                                >
+                                    Users
+                                </jet-nav-link>
+                                <jet-nav-link
+                                    class="dark:text-white"
+                                    :href="route('admin.entities')"
+                                    :active="route().current('admin.entities')"
+                                >
                                     Entities
+                                </jet-nav-link>
+                                <jet-nav-link
+                                    class="dark:text-white"
+                                    :href="route('admin.locations')"
+                                    :active="route().current('admin.locations')"
+                                >
+                                    Locations
                                 </jet-nav-link>
                                 <div class="inline-flex items-center">
                                     <ThemeSwitcher />

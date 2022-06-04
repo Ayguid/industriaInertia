@@ -19,6 +19,7 @@ defineProps({
                     :class="{ 'bg-indigo-400 text-white': link.active }"
                     :href="link.url"
                     v-html="link.label"
+                    preserve-scroll
                 />
             </template>
         </div>

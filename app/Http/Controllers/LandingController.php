@@ -18,12 +18,12 @@ class LandingController extends Controller
         $user_id = auth()->user()->id  ?? null;
         $paginate = 5;
         /////////////////////// settings BEFORE  query ///////////////
-        // ex catsinrequest locations=[{id:1,name:"algo"},{id:1,name:"algo"}] 
+        // ex locations inRequest locations=[{id:1,name:"algo", parent:{id:1,name:"algoParent"}},{id:1,name:"algo"}] 
         if (request()->exists('locations')) {
             //armamos un array con los ids de el array de objetos que llego para locations
             $locationsIds = array_column(json_decode(request()->get('locations')), 'id');
         }
-        // ex catsinrequest categories=[1,null, 34, null] 
+        // ex cats inRequest categories=[[1],null,[34, 60],null] 
         if (request()->exists('categories')) {
             $catIds = json_decode(request()->get('categories'));
             //sacamos los null values, para que no rompa el reduce
@@ -37,15 +37,35 @@ class LandingController extends Controller
         ///////////////////////////////////////////////////////////////
         /////////////// conditions of query ///////////////////////////////////////////////////////////////////////////
         if (count($catIds) == 0 && count($locationsIds) > 0) { //si hay locations y  no hay categories 
-            $entities = Entity::whereIn('country_id', $locationsIds)->orWhereIn('state_id', $locationsIds)->orWhereIn('city_id', $locationsIds);
+            $entities = Entity::where(function ($query) use ($locationsIds) {
+                $query->whereIn('country_id', $locationsIds)
+                    ->orWhereIn('state_id', $locationsIds)
+                    ->orWhereIn('city_id', $locationsIds);
+            });
         } else if (count($catIds) > 0 && count($locationsIds) == 0) { // si hay categorias en el filter, y no hay locations
             $entities = Entity::whereHas('categories',  function ($query) use ($catIds) {
-                return $query->whereIn('category_id', $catIds)->orWhereIn('parent_id', $catIds);
+                $query->whereIn('categories.id', $catIds)
+                    ->orWhere('categories.parent_id', $catIds);
             });
+            //->orWhere('categories.parent_id', $catIds)
+            /*
+                ->orWhereHas('parent', function ($query) use ($catIds) {
+                    return $query->where('id', $catIds);
+                });
+                ->orWhereIn('parent_id', $catIds);
+                ->orWhereHas('grandParent', function ($query) use ($catIds) {
+                    return $query->whereIn('category_id', $catIds);
+                });
+                */
         } else if (count($catIds) > 0 && count($locationsIds) > 0) { //si hay categories y locations
-            $entities = Entity::whereHas('categories',  function ($query) use ($catIds) {
-                return $query->whereIn('category_id', $catIds)->orWhereIn('parent_id', $catIds);
-            })->whereIn('country_id', $locationsIds)->orWhereIn('state_id', $locationsIds)->orWhereIn('city_id', $locationsIds);
+            $entities = Entity::where(function ($query) use ($locationsIds) {
+                $query->whereIn('country_id', $locationsIds)
+                    ->orWhereIn('state_id', $locationsIds)
+                    ->orWhereIn('city_id', $locationsIds);
+            })->whereHas('categories',  function ($query) use ($catIds) {
+                $query->whereIn('categories.id', $catIds)
+                    ->orWhereIn('categories.parent_id', $catIds);
+            });
         } else if (count($catIds) == 0 && count($locationsIds) == 0) { //hay nada de nada de nada
             $entities = new Entity(); //weird...
         }
@@ -65,5 +85,20 @@ class LandingController extends Controller
             'categories' => $parent_categories,
             'entities' => $entities,
         ]);
+    }
+
+    // transform nested result to simple array without nest hierarchie
+    private function flatten($array)
+    {
+        $result = [];
+        foreach ($array as $item) {
+            if (is_array($item)) {
+                $result[] = array_filter($item, function ($array) {
+                    return !is_array($array);
+                });
+                $result = array_merge($result, $this->flatten($item));
+            }
+        }
+        return array_filter($result);
     }
 }

@@ -9,38 +9,25 @@ defineProps({
 </script>
 -->
 <template>
-    <AppLayout :title="entity.username">
-        <template #header>
-            <h2
-                class="font-semibold text-xl text-gray-800 leading-tight dark:text-white"
-            >
-                Entity
-            </h2>
-        </template>
+    <Head>
+        <title>Entity Profile</title>
+        <meta name="description" content="Your page description" />
+    </Head>
+    <h2
+        class="font-semibold text-xl text-gray-800 leading-tight dark:text-white"
+    >
+        Entity
+    </h2>
 
-        <div class="py-4">
-            <div v-if="userOwns" class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
-                <div class="bg-white shadow sm:rounded-lg">
-                    <post-form />
-                    <!--
-                        <infinite-scroll :loadMore="loadMorePosts">
-                            <post-card
-                                v-for="post in myPostsAndFollowingPosts.data"
-                                :key="post.id"
-                                :postData="post"
-                                class=""
-                            ></post-card>
-                        </infinite-scroll>
-                        -->
-                </div>
-            </div>
-
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 gap-2">
+            <!--Columna 1-->
+            <div class="">
                 <div
                     class="bg-white shadow-xl sm:rounded-lg p-4 dark:bg-gray-800 dark:border-gray-700"
                 >
                     <div
-                        class="max-w-4xl mx-auto grid grid-cols-1 lg:max-w-5xl lg:gap-x-20 lg:grid-cols-2"
+                        class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2"
                     >
                         <div
                             class="relative p-3 col-start-1 row-start-1 flex flex-col rounded-lg bg-gradient-to-t from-black/75 via-black/0 sm:bg-none sm:row-start-2 sm:p-0 lg:row-start-1"
@@ -114,24 +101,12 @@ defineProps({
                             </p>
                         </div>
                         <div
-                            class="grid gap-4 col-start-1 col-end-3 row-start-1 sm:mb-6 sm:grid-cols-4 lg:gap-6 lg:col-start-2 lg:row-end-6 lg:row-span-6 lg:mb-0"
+                            class="grid gap-4 col-start-1 col-end-3 row-start-1 sm:mb-6 sm:grid-cols-2 lg:gap-6 lg:col-start-2 lg:row-end-6 lg:row-span-6 lg:mb-0"
                         >
                             <img
                                 src="https://www.givenow.com.au/img/default-cover.png"
                                 alt=""
                                 class="w-full h-60 object-cover rounded-lg sm:h-52 sm:col-span-2 lg:col-span-full"
-                                loading="lazy"
-                            />
-                            <img
-                                src="https://www.givenow.com.au/img/default-cover.png"
-                                alt=""
-                                class="hidden w-full h-52 object-cover rounded-lg sm:block sm:col-span-2 md:col-span-1 lg:row-start-2 lg:col-span-2 lg:h-32"
-                                loading="lazy"
-                            />
-                            <img
-                                src="https://www.givenow.com.au/img/default-cover.png"
-                                alt=""
-                                class="hidden w-full h-52 object-cover rounded-lg md:block lg:row-start-2 lg:col-span-2 lg:h-32"
                                 loading="lazy"
                             />
                         </div>
@@ -230,9 +205,9 @@ defineProps({
 
                             <Link
                                 v-for="(cat, i) in entity.categories"
-                                class="bg-indigo-400 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full mr-2"
+                                class="bg-indigo-400 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full mb-2 mr-2"
                                 :key="i"
-                                :href="route('categoryShow', cat.id)"
+                                :href="route('category.show', cat.id)"
                                 method="get"
                                 as="button"
                                 type="button"
@@ -242,27 +217,44 @@ defineProps({
                     </div>
                 </div>
             </div>
+            <!-- .Columna 1 end.. -->
+            <!--Columna 2-->
+            <div class="">
+                <div v-if="userOwns" class="bg-white shadow sm:rounded-lg mb-2">
+                    <post-form :entity="entity" />
+                </div>
+                <div class="">
+                    <PostFeed :posts="posts" />
+                </div>
+            </div>
+            <!-- .Columna 2 end.. -->
         </div>
-    </AppLayout>
+    </div>
 </template>
 <script>
-import AppLayout from "@/Layouts/AppLayout.vue";
 import BookmarkIcon from "@/Components/BookmarkIcon";
 import PostForm from "@/Components/Forms/PostForm";
+import PostFeed from "@/Components/PostFeed";
 import { Link } from "@inertiajs/inertia-vue3";
 export default {
     props: {
         entity: Object,
+        posts: Object,
     },
     components: {
-        AppLayout,
         BookmarkIcon,
         PostForm,
         Link,
+        PostFeed,
     },
+
+    data() {
+        return {};
+    },
+    watch: {},
     computed: {
         userOwns() {
-            return this.entity.user_id == this.$page.props.user.id;
+            return this.entity.user_id == this.$page.props?.user?.id;
         },
     },
     methods: {},

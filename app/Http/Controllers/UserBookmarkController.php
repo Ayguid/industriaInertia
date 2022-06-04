@@ -27,7 +27,7 @@ class UserBookmarkController extends Controller
             'bookmarks as bookmarked' => function ($q) use ($user) {
                 $q->where('user_id', $user->id);
             }
-        ])->withCasts(['bookmarked' => 'boolean'])->paginate($paginate);
+        ])->withCasts(['bookmarked' => 'boolean'])->with(['country', 'state', 'city', 'categories'])->paginate($paginate);
 
         if (request()->input('page') > $bookmarks->lastPage()) { // si el paginator rompe lo mandamos a la ruta inicial
             return redirect()->route('userBookmarks', $user->id);

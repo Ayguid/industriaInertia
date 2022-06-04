@@ -41,7 +41,7 @@ class Entity extends Model
     ];
 
     //protected $appends = ['location'];
-    protected $with = ['categories', 'user'];
+    protected $with = ['user'];
     protected $appends = ['background_photo_path_full_url'];
 
     public function categories()
@@ -58,7 +58,7 @@ class Entity extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class)->select('id', 'name'); //'username'
+        return $this->belongsTo(User::class)->select('id', 'name', 'email'); //'username'
     }
 
     public function entCats()
@@ -107,7 +107,7 @@ class Entity extends Model
 
     public function posts()
     {
-        return $this->morphMany(Post::class, 'model');
+        return $this->morphMany(Post::class, 'model')->latest();
     }
 
 

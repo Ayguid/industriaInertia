@@ -5,7 +5,71 @@
             :alt="$page.props.user.name"
             class="flex-shrink-0 w-12 h-12 rounded-full"
         />
+
         <form @submit.prevent="submit()" class="flex-1 ml-4">
+            <div>
+                <!--
+                <QuillEditor
+                    theme="snow"
+                    v-model:content="form.content"
+                    contentType="html"
+                    :modules="modules"
+                    :toolbar="toolbar"
+                />
+                -->
+                <QuillEditor
+                    theme="bubble"
+                    contentType="html"
+                    v-model:content="form.content"
+                    :options="options"
+                />
+            </div>
+            <!--
+            <Editor v-model="form.content" editorStyle="height: 120px">
+                <template v-slot:toolbar>
+                    <span class="ql-formats">
+                        <select class="ql-header" defaultValue="0">
+                            <option value="1">Heading</option>
+                            <option value="2">Subheading</option>
+                            <option value="0">Normal</option>
+                        </select>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-bold" type="button"></button>
+                        <button class="ql-italic" type="button"></button>
+                        <button class="ql-underline" type="button"></button>
+                        <button class="ql-strike" type="button"></button>
+                    </span>
+                    <span class="ql-formats">
+                        <select class="ql-color"></select>
+                        <select class="ql-background"></select>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-video"></button>
+                        <button class="ql-link" type="button"></button>
+                        <button
+                            class="ql-list"
+                            value="ordered"
+                            type="button"
+                        ></button>
+                        <button
+                            class="ql-list"
+                            value="bullet"
+                            type="button"
+                        ></button>
+                    </span>
+                    <span class="ql-formats">
+                        <select class="ql-align">
+                            <option defaultValue></option>
+                            <option value="center"></option>
+                            <option value="right"></option>
+                            <option value="justify"></option>
+                        </select>
+                    </span>
+                </template>
+            </Editor>
+            -->
+            <!--
             <textarea
                 ref="text-area"
                 @input="resizeTextarea"
@@ -17,6 +81,7 @@
                 placeholder="Whats up?"
                 label="Post content"
             ></textarea>
+            -->
             <jet-validation-errors class="mb-4" />
 
             <div
@@ -108,19 +173,59 @@
 import JetValidationErrors from "@/Jetstream/ValidationErrors.vue";
 import FileInput from "@/Components/Forms/FileInput";
 import axios from "axios";
+import { useForm } from "@inertiajs/inertia-vue3";
+import Editor from "primevue/editor";
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
+import "@vueup/vue-quill/dist/vue-quill.bubble.css";
+import BlotFormatter from "quill-blot-formatter";
 
 export default {
+    props: {
+        entity: Object,
+    },
     components: {
         JetValidationErrors,
         FileInput,
+        Editor,
+        QuillEditor,
     },
     data() {
         return {
             loading: false,
-            form: {
+            form: useForm({
+                entity_id: this.entity.id,
                 content: "",
-                mediaIds: [],
+                media: [],
+            }),
+            options: {
+                debug: "false",
+                modules: {
+                    toolbar: [
+                        //[{ header: 1 }, { header: 2 }],
+                        [{ size: ["small", false, "large"] }], //, "huge"
+                        ["bold", "italic", "underline", "strike"],
+                        [
+                            "blockquote",
+                            //"code-block"
+                        ],
+                        [
+                            "link",
+                            "video",
+                            //"image"
+                        ],
+                        [{ align: [] }],
+                        [{ color: [] }, { background: [] }],
+                    ],
+                },
+                placeholder: "Compose an epic...",
+                readOnly: false,
             },
+            /*
+            modules: {
+                name: "blotFormatter",
+                module: BlotFormatter,
+            },*/
             media: [],
         };
     },
@@ -129,31 +234,22 @@ export default {
             console.log(this.form.content);
             //this.loading = true;
             //this.form.mediaIds = this.media.map((item) => item.id);
-            /*
-            this.$inertia.post(this.route("posts.store"), this.form, {
-                preserveState: true,
-                onStart: () => (this.loading = true),
-                onFinish: () => (this.loading = false),
+
+            this.form.post(this.route("posts.store"), {
+                preserveState: false,
+                preserveScroll: true,
+                onStart: () => {},
+                onFinish: () => {},
                 onSuccess: () => {
                     this.form = {
                         content: "",
-                        mediaIds: [],
                     };
-                    this.media = [];
                 },
             });
-            */
         },
         removeMedia(index, item) {
             this.media.splice(index, 1);
-            if (item.id) {
-                axios
-                    .delete(this.route("media.destroy", item.id))
-                    .catch((e) => {
-                        console.log(e);
-                        this.media.splice(index, 0, item);
-                    });
-            }
+            //this.form.media.splice(index, 1);
         },
         resizeTextarea() {
             const textarea = this.$refs["text-area"];
@@ -162,20 +258,21 @@ export default {
         },
         uploadMedia(files) {
             console.log(files);
+            this.form.media = files;
+            this.media = [];
             Array.from(files).forEach((media) => {
                 let reader = new FileReader();
                 reader.readAsDataURL(media);
-
                 reader.onload = (e) => {
                     //e.target.result
                     let item = {
                         url: e.target.result,
                         id: undefined,
-                        loading: true,
+                        loading: false,
                     };
 
-                    let formData = new FormData();
-                    formData.append("file", media);
+                    //let formData = new FormData();
+                    //formData.append("file", media);
                     this.media.push(item);
                     /*
                     axios
@@ -206,9 +303,10 @@ export default {
             );
         },
     },
+    mounted() {},
 };
 </script>
-<style scoped>
+<style>
 button:disabled {
     opacity: 75%;
     cursor: not-allowed;

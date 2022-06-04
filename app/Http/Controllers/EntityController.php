@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entity;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -18,7 +19,12 @@ class EntityController extends Controller
         $paginate = 4;
         //
         $user = auth()->user() ?? $request->user();
-        $userEntities = Entity::where('user_id', $user->id)->orWhere('created_by_user_id', $user->id)->where('user_id', false)->with('country', 'state', 'city')->paginate($paginate); //las que somos dueños
+        $userEntities = Entity::where('user_id', $user->id)->orWhere('created_by_user_id', $user->id)->where('user_id', false)->withCount([
+            'bookmarks',
+            'bookmarks as bookmarked' => function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            }
+        ])->withCasts(['bookmarked' => 'boolean'])->with(['country', 'state', 'city', 'categories'])->paginate($paginate); //las que somos dueños
         return Inertia::render('UserEntities', [
             'user_entities' => $userEntities
         ]);
@@ -31,8 +37,10 @@ class EntityController extends Controller
      */
     public function create()
     {
+        $parent_categories = Category::where('parent_id', null)->with('children')->get();
         return Inertia::render('EntityCreate', [
-            'edit' => false
+            'edit' => false,
+            'categories' => $parent_categories
         ]);
     }
 
@@ -55,16 +63,27 @@ class EntityController extends Controller
      */
     public function show(Entity $entity)
     {
+        //return Entity::where("id", "4")->with(['posts'])->get();
         $user_id = auth()->user()->id ?? null;
+        $paginate = 10;
         //  
-        $ent = $entity::where('id', $entity->id)->withCount([
+        $entity = $entity::where('id', $entity->id)->withCount([
             'bookmarks',
             'bookmarks as bookmarked' => function ($q) use ($user_id) {
                 $q->where('user_id', $user_id);
             }
-        ])->withCasts(['bookmarked' => 'boolean'])->with(['country', 'state', 'city']);
+        ])->withCasts(['bookmarked' => 'boolean'])->with(['country', 'state', 'city',]);
+        //
+        $entity = $entity->with(['categories'])->first();
+        $posts = $entity->posts()->paginate($paginate);
+
+        if (request()->wantsJson()) {
+            return $posts;
+        }
+
         return Inertia::render('EntityProfile', [
-            'entity' => $ent->first()
+            'entity' => $entity,
+            'posts' => $posts
         ]);
     }
 

@@ -30,7 +30,7 @@
 
             <div class="grid grid-cols-2 gap-4 mb-2">
                 <Link
-                    :href="route('entityProfile', entity.username)"
+                    :href="route('entity.profile', entity.username)"
                     class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-indigo-400 rounded-lg hover:bg-indigo-600 focus:ring-4 focus:outline-none focus:ring-indigo-300"
                 >
                     Go
@@ -48,7 +48,6 @@
                     </svg>
                 </Link>
                 <BookmarkIcon
-                    v-if="bookmarkBtn"
                     :bookmarked="entity.bookmarked"
                     :entityId="entity.id"
                 />
@@ -91,7 +90,6 @@ export default defineComponent({
     // type inference enabled
     props: {
         entity: Object,
-        bookmarkBtn: Boolean,
     },
     components: {
         BookmarkIcon,

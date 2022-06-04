@@ -57,7 +57,7 @@ export default {
                         resetOnSuccess: true,
                     }
                 )
-                .post(route("bookmarkEntity", this.entityId), {
+                .post(route("entities.bookmark", this.entityId), {
                     preserveScroll: true,
                 });
         },

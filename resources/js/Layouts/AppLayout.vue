@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import JetApplicationMark from "@/Jetstream/ApplicationMark.vue";
@@ -9,10 +9,11 @@ import JetDropdownLink from "@/Jetstream/DropdownLink.vue";
 import JetNavLink from "@/Jetstream/NavLink.vue";
 import JetResponsiveNavLink from "@/Jetstream/ResponsiveNavLink.vue";
 import ThemeSwitcher from "@/Components/ThemeSwitcher.vue";
+import Search from "@/Components/Search.vue";
 defineProps({
     title: String,
 });
-
+const term = ref("");
 const showingNavigationDropdown = ref(false);
 
 const switchToTeam = (team) => {
@@ -30,6 +31,12 @@ const switchToTeam = (team) => {
 const logout = () => {
     Inertia.post(route("logout"));
 };
+
+//scroll
+
+//
+
+onMounted(() => {});
 </script>
 
 <template>
@@ -73,8 +80,8 @@ const logout = () => {
                                 </jet-nav-link>
                                 <jet-nav-link
                                     class="dark:text-white"
-                                    :href="route('userBookmarks')"
-                                    :active="route().current('userBookmarks')"
+                                    :href="route('user.bookmarks')"
+                                    :active="route().current('user.bookmarks')"
                                 >
                                     User Bookmarks
                                 </jet-nav-link>
@@ -87,6 +94,14 @@ const logout = () => {
                                 </jet-nav-link>
                                 <div class="inline-flex items-center">
                                     <ThemeSwitcher />
+                                </div>
+                                <div class="flex items-center justify-center'">
+                                    <Search
+                                        @delete:search="term = ''"
+                                        id="search"
+                                        class="w-full max-w-md mr-10"
+                                        v-model:search="term"
+                                    />
                                 </div>
                             </div>
 

@@ -13,6 +13,7 @@ class Category extends Model
     protected $table = 'categories';
     protected $fillable = ['parent_id', 'name'];
 
+    //protected $appends = ['key'];
 
     public function parent()
     {
