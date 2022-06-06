@@ -3,14 +3,14 @@
         <title>Landing</title>
         <meta name="description" content="Your page description" />
     </Head>
-    <h2
-        class="font-semibold text-xl text-gray-800 leading-tight dark:text-white"
-    >
-        Aarvor -- Landing
-    </h2>
 
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <h2
+                class="font-semibold text-xl text-gray-800 leading-tight dark:text-white"
+            >
+                a Aarvor -- Landing
+            </h2>
             <!--Filter start-->
             <div
                 class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4"
@@ -121,7 +121,6 @@ export default {
         selectedCats: {
             //usamos un watcher para ver los cambios en el filtro, los eventos del tree select estan bugged
             handler(newValue, oldValue) {
-                this.entities.current_page = 1; // si el filtro cambia volvemos a la priemr hoja
                 this.filterEntities();
             },
             deep: true,
@@ -129,7 +128,6 @@ export default {
         selectedLocations: {
             //usamos un watcher para ver los cambios en el filtro, los eventos del tree select estan bugged
             handler(newValue, oldValue) {
-                this.entities.current_page = 1; // si el filtro cambia volvemos a la priemr hoja
                 this.filterEntities();
             },
             deep: true,
@@ -142,7 +140,7 @@ export default {
                 {
                     locations: JSON.stringify(this.selectedLocations),
                     categories: JSON.stringify(this.selectedCats),
-                    page: this.entities.current_page,
+                    page: 1,
                 },
                 {
                     replace: false,

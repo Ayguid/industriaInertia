@@ -27,6 +27,9 @@ export default {
             document.getElementById("themeDiv").classList.add("dark");
         }
         */
+        if (localStorage.getItem("darkMode") == "true") {
+            document.getElementById("themeDiv").classList.add("dark");
+        }
     },
 };
 </script>

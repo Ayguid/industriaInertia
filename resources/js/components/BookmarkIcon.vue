@@ -18,6 +18,7 @@
                 </svg>
             </button>
         </div>
+
         <div v-else>
             <button>
                 <svg
@@ -59,6 +60,9 @@ export default {
                 )
                 .post(route("entities.bookmark", this.entityId), {
                     preserveScroll: true,
+                    onError: (errors) => {
+                        alert(errors.message);
+                    },
                 });
         },
     },

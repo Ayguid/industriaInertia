@@ -12,9 +12,11 @@ class TestController extends Controller
     //
     public function index()
     {
-        //$role = Role::create(['name' => 'super-admin']);
-        //$user = User::where('id', 1)->first();
-        //$user->assignRole('super-admin');
+        /*
+        $role = Role::create(['name' => 'super-admin']);
+        $user = User::where('id', 1)->first();
+        $user->assignRole($role);
+        */
         return;
     }
 }

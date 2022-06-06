@@ -1,5 +1,5 @@
 <template>
-    <div class="flex p-4">
+    <div class="flex p-4 rounded-lg bg-white dark:bg-gray-600">
         <img
             :src="$page.props.user.profile_photo_url"
             :alt="$page.props.user.name"
@@ -7,7 +7,7 @@
         />
 
         <form @submit.prevent="submit()" class="flex-1 ml-4">
-            <div>
+            <div class="z-50 relative">
                 <!--
                 <QuillEditor
                     theme="snow"
@@ -24,51 +24,7 @@
                     :options="options"
                 />
             </div>
-            <!--
-            <Editor v-model="form.content" editorStyle="height: 120px">
-                <template v-slot:toolbar>
-                    <span class="ql-formats">
-                        <select class="ql-header" defaultValue="0">
-                            <option value="1">Heading</option>
-                            <option value="2">Subheading</option>
-                            <option value="0">Normal</option>
-                        </select>
-                    </span>
-                    <span class="ql-formats">
-                        <button class="ql-bold" type="button"></button>
-                        <button class="ql-italic" type="button"></button>
-                        <button class="ql-underline" type="button"></button>
-                        <button class="ql-strike" type="button"></button>
-                    </span>
-                    <span class="ql-formats">
-                        <select class="ql-color"></select>
-                        <select class="ql-background"></select>
-                    </span>
-                    <span class="ql-formats">
-                        <button class="ql-video"></button>
-                        <button class="ql-link" type="button"></button>
-                        <button
-                            class="ql-list"
-                            value="ordered"
-                            type="button"
-                        ></button>
-                        <button
-                            class="ql-list"
-                            value="bullet"
-                            type="button"
-                        ></button>
-                    </span>
-                    <span class="ql-formats">
-                        <select class="ql-align">
-                            <option defaultValue></option>
-                            <option value="center"></option>
-                            <option value="right"></option>
-                            <option value="justify"></option>
-                        </select>
-                    </span>
-                </template>
-            </Editor>
-            -->
+
             <!--
             <textarea
                 ref="text-area"
@@ -172,13 +128,10 @@
 <script>
 import JetValidationErrors from "@/Jetstream/ValidationErrors.vue";
 import FileInput from "@/Components/Forms/FileInput";
-import axios from "axios";
 import { useForm } from "@inertiajs/inertia-vue3";
-import Editor from "primevue/editor";
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import "@vueup/vue-quill/dist/vue-quill.bubble.css";
-import BlotFormatter from "quill-blot-formatter";
 
 export default {
     props: {
@@ -187,7 +140,6 @@ export default {
     components: {
         JetValidationErrors,
         FileInput,
-        Editor,
         QuillEditor,
     },
     data() {

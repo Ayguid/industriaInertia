@@ -18,25 +18,25 @@ export default {
         <title>User Entities</title>
         <meta name="description" content="Your page description" />
     </Head>
-    <h2
-        class="font-semibold text-xl text-gray-800 leading-tight dark:text-white"
-    >
-        User Entities
-    </h2>
 
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="mb-4">
-                <jet-nav-link
-                    class="dark:text-white"
-                    :href="route('entities.create')"
-                    :active="route().current('entities.create')"
-                >
-                    Create entity
-                </jet-nav-link>
-            </div>
+            <h2
+                class="font-semibold text-xl text-gray-800 leading-tight dark:text-white inline"
+            >
+                User Entities
+            </h2>
+
+            <jet-nav-link
+                class="dark:text-white"
+                :href="route('entities.create')"
+                :active="route().current('entities.create')"
+            >
+                Create entity
+            </jet-nav-link>
+
             <div
-                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8"
+                class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4"
             >
                 <!-- Entity card start -->
                 <div v-for="(entity, i) in user_entities.data" class="">

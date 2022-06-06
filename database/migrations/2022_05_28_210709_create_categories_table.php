@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->integer('parent_id')->nullable();
+            $table->foreignId('parent_id')->nullable()
+                ->constrained('categories')
+                ->onDelete('cascade'); // esto es para borrar los childs en un pase
             $table->string('name');
             $table->timestamps();
         });

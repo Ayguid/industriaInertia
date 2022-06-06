@@ -1,13 +1,16 @@
 <template>
-    <infinite-scroll :loadMore="loadMorePosts">
-        <div class="min-h-full">
-            <post-card
-                v-for="(post, i) in feedPosts.data"
-                :key="i"
-                :post="post"
-            />
-        </div>
-    </infinite-scroll>
+    <div
+        id="feed_container"
+        class="overflow-y-scroll w-full rounded-lg"
+        :style="'height: ' + height + ';'"
+        scroll-region
+    >
+        <infinite-scroll :loadMore="loadMorePosts">
+            <div v-for="(post, i) in feedPosts.data" :key="i" class="mb-2">
+                <post-card :post="post" />
+            </div>
+        </infinite-scroll>
+    </div>
 </template>
 <script>
 import AppLayout from "@/Layouts/AppLayout.vue";
@@ -16,6 +19,7 @@ import InfiniteScroll from "@/Components/InfiniteScroll";
 export default {
     props: {
         posts: Object,
+        height: String,
     },
     components: {
         AppLayout,
@@ -50,6 +54,22 @@ export default {
                 };
             });
         },
+    },
+    mounted() {
+        /*
+        const feed_container = document.getElementById("feed_container");
+        let top = localStorage.getItem("feed_container-scroll");
+        if (top !== null) {
+            feed_container.scrollTop = parseInt(top, 10);
+        }
+
+        window.addEventListener("beforeunload", () => {
+            localStorage.setItem(
+                "feed_container-scroll",
+                feed_container.scrollTop
+            );
+        });
+        */
     },
 };
 </script>

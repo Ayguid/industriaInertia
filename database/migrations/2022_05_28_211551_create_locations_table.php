@@ -16,15 +16,19 @@ return new class extends Migration
         //
         Schema::create('location_types', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreignId('parent_id')->nullable()
+                ->constrained('location_types')
+                ->onDelete('cascade'); // esto es para borrar los childs en un pase
             $table->string('name');
             $table->timestamps();
         });
         //
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('type_id');
-            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreignId('type_id');
+            $table->foreignId('parent_id')->nullable()
+                ->constrained('locations')
+                ->onDelete('cascade'); // esto es para borrar los childs en un pase
             $table->string('name');
             $table->string('code')->nullable();
             $table->string('lat')->nullable();

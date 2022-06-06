@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Entity;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
+//use DB;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -77,7 +79,7 @@ class EntityController extends Controller
         $entity = $entity->with(['categories'])->first();
         $posts = $entity->posts()->paginate($paginate);
 
-        if (request()->wantsJson()) {
+        if (request()->wantsJson()) { // si es req via ajax
             return $posts;
         }
 
@@ -119,5 +121,25 @@ class EntityController extends Controller
     public function destroy(Entity $entity)
     {
         //
+    }
+    //// Profile Pic
+    public function storeProfilePic(Request $request)
+    {
+        $file = $request->file('file');
+        //dd($file);
+        $entity = Entity::where('id', $request["entity_id"])->first();
+        //borrar foto anterior start -->
+        if ($entity->profile_photo_path) Storage::disk('public')->delete($entity->profile_photo_path);
+        //borrar foto anterior end-->
+        if ($file) {
+            $path = $request->file('file')->store('entity-profile-pics/' . $request->user()->id, 'public');
+        } else {
+            $path = null;
+        }
+        //
+        $entity->profile_photo_path = $path;
+        $entity->update();
+        //
+        return redirect()->back();
     }
 }

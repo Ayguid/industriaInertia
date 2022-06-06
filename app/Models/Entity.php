@@ -42,7 +42,7 @@ class Entity extends Model
 
     //protected $appends = ['location'];
     protected $with = ['user'];
-    protected $appends = ['background_photo_path_full_url'];
+    protected $appends = ['background_photo_path_full_url', 'profile_photo_path_full_url'];
 
     public function categories()
     {
@@ -111,6 +111,10 @@ class Entity extends Model
     }
 
 
+    public function getprofilePhotoPathFullUrlAttribute()
+    {
+        return url('storage/' . $this->profile_photo_path);
+    }
     public function getbackgroundPhotoPathFullUrlAttribute()
     {
         return url('storage/' . $this->background_photo_path);

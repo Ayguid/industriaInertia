@@ -1,5 +1,7 @@
 <template>
-    <div class="p-4 bg-white rounded-lg border">
+    <div
+        class="p-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-600 dark:border-gray-700"
+    >
         <!--
         <img
             :src="post.user.profile_photo_url"
@@ -25,7 +27,7 @@
       </p>
       -->
         <span
-            class="text-md leading-4 font-medium text-white sm:text-slate-500 dark:sm:text-slate-400"
+            class="text-md leading-4 font-medium text-gray-800 dark:sm:text-white"
             style="white-space: break-spaces"
             v-html="post.content"
         ></span>
@@ -143,14 +145,6 @@ export default {
         },
     },
     methods: {
-        toggleLike() {
-            //solucion chancha para evitar el scroll nefasto de inertia que se da con e boton de link y preserve scroll, hay un tema con el pagination ,
-            axios.post(`/posts/${this.post.id}/like`).then((response) => {
-                console.log(response);
-                this.post.likes_count = response.data;
-                this.post.liked = !this.post.liked;
-            });
-        },
         deletePost() {
             this.$inertia.delete(
                 this.route("posts.destroy", this.post),

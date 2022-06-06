@@ -14,14 +14,14 @@ defineProps({
         <title>User Bookmarks</title>
         <meta name="description" content="Your page description" />
     </Head>
-    <h2
-        class="font-semibold text-xl text-gray-800 leading-tight dark:text-white"
-    >
-        User Bookmarks
-    </h2>
 
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <h2
+                class="font-semibold text-xl text-gray-800 leading-tight dark:text-white"
+            >
+                User Bookmarks
+            </h2>
             <div
                 class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4"
             >

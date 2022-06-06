@@ -18,6 +18,20 @@ export default {
         };
     },
     mounted() {
+        const feed_container = document.getElementById("feed_container");
+        feed_container.addEventListener("scroll", () => {
+            if (
+                feed_container.offsetHeight + feed_container.scrollTop >=
+                    feed_container.scrollHeight &&
+                !this.loading
+            ) {
+                this.loading = true;
+                this.loadMore().finally(() => (this.loading = false));
+                console.log("scrolled to bottom");
+            }
+        });
+
+        /*
         window.addEventListener(
             "scroll",
             debounce((e) => {
@@ -26,13 +40,12 @@ export default {
                     document.documentElement.scrollTop -
                     window.innerHeight;
                 if (pixelsFromBottom < 200 && !this.loading) {
-                    //console.log(this.myPostsAndFollowingPosts.next_page_url);
-                    //this.$emit('loadMore');
                     this.loading = true;
                     this.loadMore().finally(() => (this.loading = false));
                 }
             }, 100)
         );
+        */
     },
 };
 </script>

@@ -43,7 +43,17 @@ class UserBookmarkController extends Controller
 
     public function toggle(Entity $entity)
     {
+        $bookmark_limit = 2;
         $entity->bookmarks()->toggle(auth()->id());
+
+        /*
+        if (auth()->user()->bookmarks()->count() > $bookmark_limit) { //validamos el limite de bookmarks
+            $entity->bookmarks()->toggle(auth()->id());
+            return redirect()->back()->withErrors([
+                'message' => 'Limit achieved'
+            ]);
+        }
+        */
         return redirect()->back();
     }
 

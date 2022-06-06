@@ -35,7 +35,7 @@ export default {
                 </section>
 
                 <footer class="modal-footer">
-                    <slot name="footer"> This is the default footer! </slot>
+                    <slot name="footer"> </slot>
                     <button
                         type="button"
                         class="bg-indigo-400 text-white h-10 inline-flex items-center justify-center px-4 font-bold border rounded-full focus:outline-none"
@@ -70,6 +70,7 @@ export default {
     overflow-x: auto;
     display: flex;
     flex-direction: column;
+    min-width: 30%;
 }
 
 .modal-header,

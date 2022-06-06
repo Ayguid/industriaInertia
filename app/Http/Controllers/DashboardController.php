@@ -13,7 +13,11 @@ class DashboardController extends Controller
     {
         //devolvemos los posts de los entities que el user tiene bookmarked
         $paginate = 15;
-        $posts = Post::whereIn('model_id', auth()->user()->bookmarks()->get()->pluck("id"))->with(['entityAuthor'])->latest()->paginate($paginate);
+        $posts = Post::whereIn('model_id', auth()->user()->bookmarks()->get()->pluck("id"))
+            ->with(['entityAuthor'])
+            ->latest()
+            //->orderBy('')
+            ->paginate($paginate);
         // return final
 
         if (request()->wantsJson()) {

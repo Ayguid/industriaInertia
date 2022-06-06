@@ -1,7 +1,6 @@
 <script setup>
 import { ref, reactive, computed } from "vue";
 import OrganizationChart from "primevue/organizationchart";
-import TreeSelect from "primevue/treeselect";
 import { useToast } from "primevue/usetoast";
 import Toast from "primevue/toast";
 import JetNavLink from "@/Jetstream/NavLink.vue";
@@ -32,7 +31,7 @@ const filters = ref({
 
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="">
                 <span v-for="location in props.locations" :key="location.id">
                     <jet-nav-link
                         class="dark:text-white"
@@ -78,7 +77,7 @@ const filters = ref({
                         <Column header="actions">
                             <template #body="data">
                                 <jet-nav-link
-                                    class="dark:text-white"
+                                    class=""
                                     :href="
                                         route('admin.locations', data.data.id)
                                     "

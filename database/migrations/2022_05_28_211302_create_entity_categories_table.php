@@ -15,8 +15,12 @@ return new class extends Migration
     {
         Schema::create('entity_categories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('entity_id')->nullable();
-            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreignId('category_id')
+                ->references('id')->on('categories')
+                ->onDelete('cascade'); // para que se borren los entity_categories si se borra una categoria
+            $table->foreignId('entity_id')->nullable()
+                ->references('id')->on('entities')
+                ->onDelete('cascade'); // para que se borren los entity_categories si se borra un entity
             $table->timestamps();
         });
     }

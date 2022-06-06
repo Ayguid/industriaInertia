@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->integer('parent_id')->nullable();
+            // se complica hacer el cascade delete porque puede ser cuando se borra un usuario, o un entity...
+            //pensarla, manejar el cascade delete desde el controlaror
             $table->nullableMorphs('model');
             $table->foreignId('user_id');
             $table->string('title')->nullable();

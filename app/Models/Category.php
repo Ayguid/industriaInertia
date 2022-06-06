@@ -38,4 +38,18 @@ class Category extends Model
     {
         return $this->hasManyThrough(Entity::class, EntityCategory::class, 'category_id', 'id', 'id', 'entity_id');
     }
+
+
+    //
+    /*
+    public static function boot()
+    {
+        parent::boot();
+
+        // before delete() method call this
+        static::deleting(function (Category $category) {
+            $category->childs()->delete(); // esto hace un cascade de delete cuando se borra una categoria, borra a sus hijos
+        });
+    }
+    */
 }

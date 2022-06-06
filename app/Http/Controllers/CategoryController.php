@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Storage;
+//use DB;
 
 class CategoryController extends Controller
 {
@@ -48,8 +50,13 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         //
+        if ($category->id) {
+            $categories = [Category::where('id', $category->id)->with(['childs', 'grandParent'])->first()];
+        } else {
+            $categories = Category::where('parent_id', null)->with(['childs', 'grandParent'])->get();
+        }
         return Inertia::render('CategoryLanding', [
-            'category' => Category::where('id', $category->id)->with(['childs', 'grandParent'])->first()
+            'categories' => $categories
         ]);
     }
 

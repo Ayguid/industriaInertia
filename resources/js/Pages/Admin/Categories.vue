@@ -10,7 +10,7 @@ import InputText from "primevue/inputtext";
 import Column from "primevue/column";
 import Button from "primevue/button";
 import Modal from "@/Components/Modal.vue";
-import CategoryForm from "@/Components/Forms/CategoryForm.vue";
+import CategoryForm from "@/Pages/Admin/Components/Forms/CategoryForm.vue";
 
 const toast = useToast();
 
@@ -82,7 +82,7 @@ const selectCategory = (data, mode) => {
             <CategoryForm :category="selectedCategory" />
         </template>
 
-        <template v-slot:footer> This is a new modal footer. </template>
+        <template v-slot:footer> </template>
     </Modal>
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -180,6 +180,12 @@ const selectCategory = (data, mode) => {
                             </span>
                             <span class="mr-2">
                                 <button
+                                    @click="
+                                        selectCategory(
+                                            data.node,
+                                            'delete-category'
+                                        )
+                                    "
                                     type="button"
                                     class="bg-red-400 text-white h-10 inline-flex items-center justify-center px-4 font-bold border rounded-full focus:outline-none"
                                 >

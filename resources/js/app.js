@@ -22,7 +22,7 @@ import ToastService from 'primevue/toastservice';
 import AppLayout from "@/Layouts/AppLayout.vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 
-const app = createInertiaApp({
+createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => {
         const page = require(`./Pages/${name}.vue`).default

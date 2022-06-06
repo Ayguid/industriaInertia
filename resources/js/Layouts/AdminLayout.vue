@@ -66,6 +66,13 @@ const logout = () => {
                             >
                                 <jet-nav-link
                                     class="dark:text-white"
+                                    :href="route('admin.locations')"
+                                    :active="route().current('admin.locations')"
+                                >
+                                    Locations
+                                </jet-nav-link>
+                                <jet-nav-link
+                                    class="dark:text-white"
                                     :href="route('admin.categories')"
                                     :active="
                                         route().current('admin.categories')
@@ -86,13 +93,6 @@ const logout = () => {
                                     :active="route().current('admin.entities')"
                                 >
                                     Entities
-                                </jet-nav-link>
-                                <jet-nav-link
-                                    class="dark:text-white"
-                                    :href="route('admin.locations')"
-                                    :active="route().current('admin.locations')"
-                                >
-                                    Locations
                                 </jet-nav-link>
                                 <div class="inline-flex items-center">
                                     <ThemeSwitcher />

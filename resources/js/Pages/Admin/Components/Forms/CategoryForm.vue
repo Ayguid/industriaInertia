@@ -15,12 +15,16 @@ const data = reactive({
     <div class="grid p-fluid">
         <div class="col-12 md:col-4">
             <form @submit.prevent="submit()">
-                <div class="p-inputgroup mb-2">
+                <div
+                    v-if="category.mode != 'delete-category'"
+                    class="p-inputgroup mb-2"
+                >
                     <span class="p-inputgroup-addon">
                         <i class="pi pi-user"></i>
                     </span>
                     <InputText v-model="form.name" placeholder="Name" />
                 </div>
+                <div v-else>Delete, no undo!!!</div>
                 <div class="p-inputgroup">
                     <button
                         type="submit"
@@ -88,13 +92,28 @@ export default {
                     });
                     break;
                 case "edit-category":
-                    this.form.put(this.route("admin.categories.update"), {
-                        preserveState: false,
-                        preserveScroll: false,
-                        onStart: () => {},
-                        onFinish: () => {},
-                        onSuccess: () => {},
-                    });
+                    this.form.put(
+                        this.route("admin.categories.update", this.category.id),
+                        {
+                            preserveState: false,
+                            preserveScroll: false,
+                            onStart: () => {},
+                            onFinish: () => {},
+                            onSuccess: () => {},
+                        }
+                    );
+                    break;
+                case "delete-category":
+                    this.form.delete(
+                        this.route("admin.categories.delete", this.category.id),
+                        {
+                            preserveState: false,
+                            preserveScroll: false,
+                            onStart: () => {},
+                            onFinish: () => {},
+                            onSuccess: () => {},
+                        }
+                    );
                     break;
             }
         },
