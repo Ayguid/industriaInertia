@@ -39,7 +39,7 @@ export default {
                 class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4"
             >
                 <!-- Entity card start -->
-                <div v-for="(entity, i) in user_entities.data" class="">
+                <div v-for="(entity, i) in user_entities.data" class="" :key="i">
                     <EntityCard :entity="entity" />
                 </div>
                 <!-- Entity card end -->

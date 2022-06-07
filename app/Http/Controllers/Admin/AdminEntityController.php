@@ -27,7 +27,33 @@ class AdminEntityController extends Controller
     public function show(Entity $entity)
     {
         return Inertia::render('Admin/EntityProfile', [
-            'entity' => $entity->with(['user', 'country', 'state', 'city'])->first()
+            'entity' => $entity->with(['country', 'state', 'city'])->first()
         ]);
+    }
+
+        /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //pasamos el modelo para que se arme el form solo con los fillables
+        $model = new Entity();
+        return Inertia::render('Admin/EntityCreate', [
+            'entity_model' =>  $model->getFillable(),
+        ]);
+    }
+    public function store(Request $request)
+    {
+        //
+        $validatedData = $request->validate([
+            //'title' => 'required|string|min:4',
+            'description' => 'required|string|min:4',
+            'username' => 'required|string|min:4|unique:entities',
+        ]);
+        //pasamos el modelo para que se arme el form solo con los fillables
+        Entity::create($request->all());
+        return redirect()->back();
     }
 }

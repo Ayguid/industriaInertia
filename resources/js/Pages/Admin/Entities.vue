@@ -4,6 +4,7 @@ import Column from "primevue/column";
 import Pagination from "@/Components/Pagination.vue";
 import FilterForm from "@/Pages/Admin/Components/Forms/FilterForm.vue";
 import { Link } from "@inertiajs/inertia-vue3";
+//import JetNavLink from "@/Jetstream/NavLink.vue";
 
 const props = defineProps({
     entities: Object,
@@ -69,6 +70,12 @@ const props = defineProps({
                     <Column field="user.email" header="user email"></Column>
                 </DataTable>
             </div>
+                <Link
+                    :href="route('admin.entities.create')"
+                    class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-indigo-400 rounded-lg hover:bg-indigo-600 focus:ring-4 focus:outline-none focus:ring-indigo-300"
+                >
+                    Create entity
+                </Link>
         </div>
     </div>
 </template>

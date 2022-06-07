@@ -50,7 +50,7 @@ const resize = function (image, ratio, MAX_WIDTH, MAX_HEIGHT) {
         });
     });
 };
-
+// 
 const dataUrlToBlob = function (url) {
     const arr = url.split(',');
     const mime = arr[0].match(/:(.*?);/)[1];

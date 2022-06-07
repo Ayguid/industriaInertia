@@ -19,7 +19,7 @@ import InfiniteScroll from "@/Components/InfiniteScroll";
 export default {
     props: {
         posts: Object,
-        height: String,
+        height: [String, Number],
     },
     components: {
         AppLayout,

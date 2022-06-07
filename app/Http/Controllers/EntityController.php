@@ -19,7 +19,7 @@ class EntityController extends Controller
     public function index(Request $request)
     {
         $paginate = 4;
-        //
+        // 
         $user = auth()->user() ?? $request->user();
         $userEntities = Entity::where('user_id', $user->id)->orWhere('created_by_user_id', $user->id)->where('user_id', false)->withCount([
             'bookmarks',

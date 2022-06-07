@@ -36,7 +36,7 @@ class Entity extends Model
         'postal_code',
         'phone',
         'cellphone',
-        'profile_path_url',
+        'profile_photo_path',
         'background_photo_path'
     ];
 
