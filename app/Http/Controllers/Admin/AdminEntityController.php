@@ -27,11 +27,11 @@ class AdminEntityController extends Controller
     public function show(Entity $entity)
     {
         return Inertia::render('Admin/EntityProfile', [
-            'entity' => $entity->with(['country', 'state', 'city'])->first()
+            'entity' => $entity->with(['categories', 'country', 'state', 'city'])->first()
         ]);
     }
 
-        /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -44,6 +44,12 @@ class AdminEntityController extends Controller
             'entity_model' =>  $model->getFillable(),
         ]);
     }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         //

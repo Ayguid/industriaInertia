@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Location;
+use App\Models\Category;
 //use App\Support\Collection; //herramienta para paginear jsons
 
 class PublicApiController extends Controller
@@ -37,6 +38,12 @@ class PublicApiController extends Controller
                 return $loc->where("name", 'like', '%' . $queryParam . '%');
             })->with('parent:id,name')->paginate(100);
 
+        return response($locations, 200);
+    }
+    public function categories(Request $request)
+    {
+        $queryParam = $request['query']; // el nombre que escribieron
+        $locations = Category::where("name", 'like', '%' . $queryParam . '%')->paginate(100);
         return response($locations, 200);
     }
 }

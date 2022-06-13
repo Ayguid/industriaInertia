@@ -23,7 +23,9 @@ class Entity extends Model
         'name',
         'username',
         'email',
+        'website',
         'description',
+        'description_alt',
         'cuit',
         'cuil',
         'founded_date',
@@ -34,10 +36,13 @@ class Entity extends Model
         'street',
         'street_number',
         'postal_code',
+        'apartment',
+        'apartment_number',
         'phone',
-        'cellphone',
+        'phone_alt',
+        'international_activity_code',
         'profile_photo_path',
-        'background_photo_path'
+        'background_photo_path',
     ];
 
     //protected $appends = ['location'];
