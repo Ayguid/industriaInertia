@@ -85,6 +85,6 @@ Route::middleware([
     //entities
     Route::get('/entities', [AdminEntityController::class, 'index'])->name('admin.entities');
     Route::get('/entities/{entity}', [AdminEntityController::class, 'show'])->name('admin.entities.show');
-    Route::get('create/entity', [AdminEntityController::class, 'create'])->name('admin.entities.create');
-    Route::post('store/entity', [AdminEntityController::class, 'store'])->name('admin.entities.store');
+    Route::get('/entity', [AdminEntityController::class, 'create'])->name('admin.entities.create');
+    Route::post('/entity', [AdminEntityController::class, 'store'])->name('admin.entities.store');
 });

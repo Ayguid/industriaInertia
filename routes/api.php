@@ -24,3 +24,4 @@ Route::get('/fetchCountries', [PublicApiController::class, 'fetchCountries']);
 Route::get('/fetchStates', [PublicApiController::class, 'fetchStates']);
 Route::get('/fetchCities', [PublicApiController::class, 'fetchCities']);
 Route::get('/categories', [PublicApiController::class, 'categories']);
+Route::get('/users', [PublicApiController::class, 'users']);

@@ -40,7 +40,7 @@ const form = computed({
         <JetInput
             id="cellphone"
             ref="cellphoneInput"
-            v-model="form.cellphone"
+            v-model="form.phone_alt"
             type="text"
             class="mt-1 block w-full"
             autocomplete="cellphone"

@@ -13,14 +13,14 @@
             </h2>
             <!--Filter start-->
             <div
-                class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4"
+                class="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 gap-4"
             >
-                <!--Categories Start-->
+                <!--Categories Start :options="[category]"-->
                 <div class="mb-2" v-for="(category, i) in categories" :key="i">
                     <treeselect
                         :placeholder="category.name"
                         :multiple="true"
-                        :options="[category]"
+                        :options="category.children"
                         :normalizer="normalizer"
                         v-model="selectedCats[i]"
                     />

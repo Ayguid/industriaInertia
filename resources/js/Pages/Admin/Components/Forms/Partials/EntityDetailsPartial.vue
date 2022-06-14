@@ -65,20 +65,7 @@ const form = computed({
 
             -->
     </div>
-    <div class="w-full">
-        <JetLabel for="name" value="Description" />
-        <JetInput
-            id="description"
-            ref="descriptionInput"
-            v-model="form.description"
-            type="text"
-            class="mt-1 block w-full"
-            autocomplete="description"
-        />
-        <!--
-            <JetInputError :message="form.errors.description" class="mt-2" />
-        -->
-    </div>
+
     <div class="w-full">
         <JetLabel for="website" value="Website" />
         <JetInput
@@ -91,6 +78,20 @@ const form = computed({
         />
         <!--
             <JetInputError :message="form.errors.website" class="mt-2" />
+        -->
+    </div>
+    <div class="w-full">
+        <JetLabel for="name" value="Description" />
+        <JetInput
+            id="description"
+            ref="descriptionInput"
+            v-model="form.description"
+            type="text"
+            class="mt-1 block w-full"
+            autocomplete="description"
+        />
+        <!--
+            <JetInputError :message="form.errors.description" class="mt-2" />
         -->
     </div>
 </template>

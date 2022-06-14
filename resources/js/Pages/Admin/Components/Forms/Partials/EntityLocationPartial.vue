@@ -153,6 +153,34 @@ onMounted(async () => {
         -->
     </div>
     <div class="w-full">
+        <JetLabel for="apartment" value="Apartment" />
+        <JetInput
+            id="apartment"
+            ref="apartmentInput"
+            v-model="form.apartment"
+            type="text"
+            class="mt-1 block w-full"
+            autocomplete="apartment"
+        />
+        <!--
+            <JetInputError :message="form.errors.street_number" class="mt-2" />
+        -->
+    </div>
+    <div class="w-full">
+        <JetLabel for="apartment_number" value="Apartment number" />
+        <JetInput
+            id="apartment_number"
+            ref="apartment_numberInput"
+            v-model="form.apartment_number"
+            type="text"
+            class="mt-1 block w-full"
+            autocomplete="apartment_number"
+        />
+        <!--
+            <JetInputError :message="form.errors.street_number" class="mt-2" />
+        -->
+    </div>
+    <div class="w-full">
         <JetLabel for="postal_code" value="Postal code" />
         <JetInput
             id="postal_code"

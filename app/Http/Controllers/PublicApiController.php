@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Location;
 use App\Models\Category;
+use App\Models\User;
 //use App\Support\Collection; //herramienta para paginear jsons
 
 class PublicApiController extends Controller
@@ -45,5 +46,11 @@ class PublicApiController extends Controller
         $queryParam = $request['query']; // el nombre que escribieron
         $locations = Category::where("name", 'like', '%' . $queryParam . '%')->paginate(100);
         return response($locations, 200);
+    }
+    public function users(Request $request)
+    {
+        $queryParam = $request['query']; // el nombre que escribieron
+        $users = User::where("email", 'like', '%' . $queryParam . '%')->paginate(100);
+        return response($users, 200);
     }
 }
