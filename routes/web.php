@@ -85,6 +85,8 @@ Route::middleware([
     //entities
     Route::get('/entities', [AdminEntityController::class, 'index'])->name('admin.entities');
     Route::get('/entities/{entity}', [AdminEntityController::class, 'show'])->name('admin.entities.show');
+    // show form, store form, update form, delete form
     Route::get('/entity', [AdminEntityController::class, 'create'])->name('admin.entities.create');
     Route::post('/entity', [AdminEntityController::class, 'store'])->name('admin.entities.store');
+    Route::put('/entity/{entity}', [AdminEntityController::class, 'update'])->name('admin.entities.update');
 });

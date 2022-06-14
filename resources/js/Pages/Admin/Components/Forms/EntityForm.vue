@@ -40,7 +40,7 @@ const props = defineProps({
 
 const form = useForm("CreateEntity", {
     // pasamos el key "CreateEntity" para que ande el remember en el history
-    id: props.entity?.id || null,
+    //id: props.entity?.id || null,
     details: {
         name: props.entity?.name || "",
         username: props.entity?.username || "",
@@ -85,13 +85,24 @@ const submit = (e) => {
         state_id: data.location.state.id, //dejamos el id nomas
         city_id: data.location.city.id, //dejamos el id nomas
         categories: data.categories.map((a) => a.id), //dejamos los ids nomas
-    })).post(route("admin.entities.store"), {
-        preserveState: true,
-        preserveScroll: false,
-        onStart: () => {},
-        onFinish: () => {},
-        onSuccess: () => {},
-    });
+    }))
+    if(props.entity?.id){// si es un update
+        form.put(route("admin.entities.update", props.entity.id), {
+            preserveState: true,
+            preserveScroll: false,
+            onStart: () => {},
+            onFinish: () => {},
+            onSuccess: () => {},
+        });
+    }else{//si es entity nuevo
+        form.post(route("admin.entities.store"), {
+            preserveState: true,
+            preserveScroll: false,
+            onStart: () => {},
+            onFinish: () => {},
+            onSuccess: () => {},
+        });
+    }
 };
 </script>
 
@@ -134,7 +145,7 @@ const submit = (e) => {
                 :class="{ 'opacity-25': form.processing }"
                 :disabled="form.processing"
             >
-                Save
+                {{entity?.id ? 'Update' : 'Create'}}
             </JetButton>
         </div>
     </form>

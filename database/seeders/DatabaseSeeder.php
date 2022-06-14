@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //5 CATEGORIAS PADRE con 3 hijos directos y 2 nietos
-
+        /*
         $categories = \App\Models\Category::factory(5)->create()->each(function ($cat) {
             $cats = \App\Models\Category::factory(3)->create()->each(function ($grandson) {
                 $grandsons = \App\Models\Category::factory(2)->create();
@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             });
             $cat->childs()->saveMany($cats);
         });
-
+        */
+        $this->seedCategories();
 
         $catsAll = Category::all();
         //USERS CON ENTITIES
@@ -53,4 +54,38 @@ class DatabaseSeeder extends Seeder
         //\App\Models\User::factory(10)->create();
 
     }
+
+    public function seedCategories()
+    {
+        $array = $fields = array();
+        $i = 0;
+        //$handle = fopen(storage_path() . "/Aarvor  - entities.csv", "r");
+        $handle = fopen(storage_path() . "/Aarvor  - Categories.csv", "r");
+        if ($handle) {
+            while (($row = fgetcsv($handle, 4096)) !== false) {
+                if (empty($fields)) {
+                    $fields = $row;
+                    continue;
+                }
+                foreach ($row as $k => $value) {
+                    $array[$i][$fields[$k]] = $value;
+                }
+                $i++;
+            }
+            if (!feof($handle)) {
+                echo "Error: unexpected fgets() fail\n";
+            }
+            fclose($handle);
+        }
+        //return $array;
+        foreach ($array as $k => $category) {
+            //dd($category['parent_id']);
+            $cat = Category::create([
+                'id'          => $category['id'],
+                'parent_id'   => ($category['parent_id'] != 'null') ? $category['parent_id'] : null,
+                'name'        => $category['name'],
+            ]);
+        }
+    }
+
 }

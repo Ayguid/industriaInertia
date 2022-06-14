@@ -27,9 +27,14 @@ class AdminEntityController extends Controller
     }
 
     public function show(Entity $entity)
-    {
+    {   
+        //inyectamos las relations asi, porque con with-> hay que hacer chanchadas para que funcione
+        $entity->categories; //categories
+        $entity->country;   //country
+        $entity->state;    //state
+        $entity->city;    //city
         return Inertia::render('Admin/EntityProfile', [
-            'entity' => $entity->with(['categories', 'country', 'state', 'city'])->first()
+            'entity' => $entity
         ]);
     }
 
@@ -41,9 +46,9 @@ class AdminEntityController extends Controller
     public function create()
     {
         //pasamos el modelo para que se arme el form solo con los fillables
-        $model = new Entity();
+        //$model = new Entity();
         return Inertia::render('Admin/EntityCreate', [
-            'entity_model' =>  $model->getFillable(),
+            //'entity_model' =>  $model->getFillable(),
         ]);
     }
     /**
@@ -107,5 +112,70 @@ class AdminEntityController extends Controller
             //devolvemos 
             return redirect()->back()->with('success', 'Entity created successfully');
         });
+    }
+
+        /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Category  $category
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Entity $entity)
+    {
+        return DB::transaction(function () use ($request, $entity) {
+            //
+            //return [$request->all(), $entity];
+            //validamos la data obligatoria////////////
+            $validatedData = $request->validate([
+                'name' => 'required|string|min:8',
+                'description' => 'required|string|min:8',
+            ]);
+
+            //chanchada, borramos todas las cats y guardamos de cero, mejorar este asco
+            $entity->entCats()->delete(); 
+
+            $entity->update(
+                [
+                    'user_id' => $request['user_id'] ?? null,
+                    'created_by_user_id' => $request['created_by_user_id'] ?? null,
+                    'name' => $validatedData['name'],
+                    'email' => $request['email'],
+                    'username' => $request['username'],
+                    'description' => $validatedData['description'],
+                    'website' => $request['website'],
+                    'employee_count' => $request['employee_count'],
+                    'founded_date' => $request['founded_date'],
+                    'phone' => $request['phone'],
+                    'phone_alt' => $request['phone_alt'],
+                    'cuil' => $request['cuil'],
+                    'cuit' => $request['cuit'],
+                    'country_id' => $request['country_id'] ?? null,
+                    'state_id' => $request['state_id'] ?? null,
+                    'city_id' => $request['city_id'] ?? null,
+                    'street' => $request['street'],
+                    'street_number' => $request['street_number'],
+                    'apartment' => $request['apartment'],
+                    'apartment_number' => $request['apartment_number'],
+                    'postal_code' => $request['postal_code'],
+                ]
+            );
+            // si llego un array con ids de categorias en $request['catIds'], creamos las entityCategories
+            if ($request['categories'] && count($request['categories']) > 0) {
+                $entCats = [];
+                for ($i = 0; $i < count($request['categories']); $i++) {
+                    $entityCategory = new EntityCategory(
+                        [
+                            'category_id' => $request['categories'][$i],
+                        ]
+                    );
+                    array_push($entCats,  $entityCategory);
+                }
+                $entity->entCats()->saveMany($entCats);
+            }
+            //pedimos el entity devuelta porque sino no refresca las relations, bug raro
+            return redirect()->back();
+        });
+        
     }
 }

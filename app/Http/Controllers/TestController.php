@@ -21,36 +21,5 @@ class TestController extends Controller
         */
     }
 
-    public function seedCategories()
-    {
-        $array = $fields = array();
-        $i = 0;
-        //$handle = fopen(storage_path() . "/Aarvor  - entities.csv", "r");
-        $handle = fopen(storage_path() . "/Aarvor  - Categories.csv", "r");
-        if ($handle) {
-            while (($row = fgetcsv($handle, 4096)) !== false) {
-                if (empty($fields)) {
-                    $fields = $row;
-                    continue;
-                }
-                foreach ($row as $k => $value) {
-                    $array[$i][$fields[$k]] = $value;
-                }
-                $i++;
-            }
-            if (!feof($handle)) {
-                echo "Error: unexpected fgets() fail\n";
-            }
-            fclose($handle);
-        }
-        //return $array;
-        foreach ($array as $k => $category) {
-            //dd($category['parent_id']);
-            $cat = Category::create([
-                'id'          => $category['id'],
-                'parent_id'   => ($category['parent_id'] != 'null') ? $category['parent_id'] : null,
-                'name'        => $category['name'],
-            ]);
-        }
-    }
+
 }
