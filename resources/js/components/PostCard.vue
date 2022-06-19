@@ -74,7 +74,7 @@
             <!--
                 <div>{{ post.likes_count }}</div>
 
-                <button class="ml-4" v-if="isUserPost">
+                <button class="ml-4" v-if="userCanEdit">
                     <EditIcon />
                 </button>
             </div>
@@ -87,7 +87,7 @@
                     {{ post.entity_author.username }}
                 </Link>
             </div>
-            <button @click="deletePost()" class="ml-4" v-if="isUserPost">
+            <button @click="deletePost()" class="ml-4" v-if="userCanEdit">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -140,7 +140,7 @@ export default {
       return this.postData.content;
     },
     */
-        isUserPost() {
+        userCanEdit() {
             return this.$page.props?.user?.id == this.post.user_id;
         },
     },

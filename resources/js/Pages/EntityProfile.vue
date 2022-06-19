@@ -66,6 +66,7 @@ defineProps({
                                     />
 
                                     <JetSecondaryButton
+                                        v-if="userCanEdit"
                                         class="mt-2 mr-2"
                                         type="button"
                                         @click.prevent="selectNewPhoto"
@@ -259,7 +260,7 @@ defineProps({
                 <!-- .Columna 1 end.. -->
                 <!--Columna 2-->
                 <div class="shadow-xl">
-                    <div ref="post_form_container" v-if="userOwns" class="mb-2">
+                    <div ref="post_form_container" v-if="userCanEdit" class="mb-2">
                         <post-form :entity="entity" />
                     </div>
                     {{ leftColumnHeight }}
@@ -311,8 +312,8 @@ export default {
         leftColumnHeight() {
             return document.getElementById("left_column");
         },
-        userOwns() {
-            return this.entity.user_id == this.$page.props?.user?.id;
+        userCanEdit() {
+            return this.entity.user_id == this.$page.props?.user?.id ;
         },
         entityLocation() {
             if (

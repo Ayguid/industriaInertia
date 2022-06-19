@@ -19,6 +19,7 @@ return new class extends Migration
                 ->constrained('categories')
                 ->onDelete('cascade'); // esto es para borrar los childs en un pase
             $table->string('name');
+            $table->boolean('is_active');
             $table->timestamps();
         });
     }

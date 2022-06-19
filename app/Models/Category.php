@@ -11,7 +11,7 @@ class Category extends Model
 {
     use HasFactory;
     protected $table = 'categories';
-    protected $fillable = ['parent_id', 'name'];
+    protected $fillable = ['parent_id', 'name', 'is_active'];
 
     //protected $appends = ['key'];
 
@@ -19,6 +19,7 @@ class Category extends Model
     {
         return $this->belongsTo($this, 'parent_id');
     }
+    //
     public function grandParent()
     {
         return $this->parent()->with('grandParent')->orderBy('name');

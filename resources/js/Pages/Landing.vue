@@ -9,7 +9,7 @@
             <h2
                 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white"
             >
-                a Aarvor -- Landing
+                Aarvor -- Landing
             </h2>
             <!--Filter start-->
             <div
@@ -27,10 +27,11 @@
                 </div>
                 <!--Categories End-->
                 <!--Location Start-->
-                <div>
+                <div class="mb-2">
                     <vSelect
-                        class="dark:bg-indigo-500 rounded"
+                        class="dark:bg-white rounded text-gray-400"
                         @search="getLocations"
+                        placeholder="Location"
                         :options="locationOptions"
                         label="name"
                         :loading="loadingLocations"
@@ -195,4 +196,8 @@ textarea:focus,
     border: 0;
     box-shadow: none;
 }
+::placeholder {
+  /*color: #333 !important;*/
+}
+
 </style>
