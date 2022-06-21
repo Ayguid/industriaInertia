@@ -82,7 +82,7 @@ import EntityCard from "@/Components/EntityCard.vue";
 import Pagination from "@/Components/Pagination.vue";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
-
+import { debounce } from "lodash";
 // import the component
 import Treeselect from "vue3-treeselect";
 // import the styles
@@ -197,7 +197,6 @@ textarea:focus,
     box-shadow: none;
 }
 ::placeholder {
-  /*color: #333 !important;*/
+    /*color: #333 !important;*/
 }
-
 </style>

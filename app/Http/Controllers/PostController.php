@@ -64,8 +64,7 @@ class PostController extends Controller
             ]);
             //uploadImages
 
-            if (count($request->files->all()) > 0) {
-                //dd($request->file('media'));
+            if (count($request->files->all()) > 0) { //
                 $media = $request->file('media');
                 foreach ($media as $key => $image) {
                     $image->store('media/' . $request->user()->id . '/' . now()->format('Y') . '/' . now()->format('m'), 'public');

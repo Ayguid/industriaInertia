@@ -43,17 +43,16 @@ const categories_list = computed(() => {
     if (
         form.categories.filter((f) => !f.parent_id).length == data.mainCatsLimit
     ) {
-        // main permited feelings
-        var activeIds = form.categories.map((a) => a.id); //array con los ids de los feelings seleccionados en el form
+        // main permited categories
+        var activeIds = form.categories.map((a) => a.id); //array con los ids de los categories seleccionados en el form
         categoriesArranged = props.categories.filter(({ id }) =>
             activeIds.includes(id)
-        ); // feelings con esos ids,,
+        ); // categories con esos ids,,
     } else {
-        //all main feelings
+        //all main categories
         categoriesArranged = props.categories;
     }
     return categoriesArranged;
-    //return this.$store.state.baseFeelings
 });
 /*
 const submit = () => {

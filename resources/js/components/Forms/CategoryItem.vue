@@ -1,6 +1,7 @@
 <template>
     <div>
         <button
+            v-show="checkIfShow"
             @click="
                 selectCategory({
                     id: category.id,
