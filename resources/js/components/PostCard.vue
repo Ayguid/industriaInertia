@@ -37,8 +37,17 @@
                   v-html="convertToTag(post.content)">
                 </p>
               -->
-        <div v-if="post.media.length" class="grid gap-2 my-2">
-            <div v-for="(m, index) in post.media" :key="index">
+
+        <div
+            v-if="post.media.length"
+            class="grid gap-2"
+            :class="{ 'grid-cols-2': post.media.length > 1 }"
+        >
+            <div
+                v-for="(m, index) in post.media"
+                :key="index"
+                class="relative flex flex-col items-center justify-center"
+            >
                 <img
                     :src="m.full_url"
                     alt=""

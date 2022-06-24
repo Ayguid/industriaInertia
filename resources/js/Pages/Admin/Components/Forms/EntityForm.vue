@@ -38,7 +38,7 @@ const props = defineProps({
     'background_photo_path'
 */
 
-const form = useForm("CreateEntity", {
+const form = useForm("Admin/CreateEntity", {
     // pasamos el key "CreateEntity" para que ande el remember en el history
     //id: props.entity?.id || null,
     details: {
@@ -85,8 +85,9 @@ const submit = (e) => {
         state_id: data.location.state.id, //dejamos el id nomas
         city_id: data.location.city.id, //dejamos el id nomas
         categories: data.categories.map((a) => a.id), //dejamos los ids nomas
-    }))
-    if(props.entity?.id){// si es un update
+    }));
+    if (props.entity?.id) {
+        // si es un update
         form.put(route("admin.entities.update", props.entity.id), {
             preserveState: true,
             preserveScroll: false,
@@ -94,7 +95,8 @@ const submit = (e) => {
             onFinish: () => {},
             onSuccess: () => {},
         });
-    }else{//si es entity nuevo
+    } else {
+        //si es entity nuevo
         form.post(route("admin.entities.store"), {
             preserveState: true,
             preserveScroll: false,
@@ -145,7 +147,7 @@ const submit = (e) => {
                 :class="{ 'opacity-25': form.processing }"
                 :disabled="form.processing"
             >
-                {{entity?.id ? 'Update' : 'Create'}}
+                {{ entity?.id ? "Update" : "Create" }}
             </JetButton>
         </div>
     </form>

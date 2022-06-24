@@ -214,12 +214,7 @@ defineProps({
                             <p
                                 class="mt-4 text-sm leading-6 col-start-1 sm:col-span-2 lg:mt-6 lg:row-start-4 lg:col-span-1 dark:text-slate-400"
                             >
-                                Lorem, ipsum dolor sit amet consectetur
-                                adipisicing elit. Veritatis, hic labore
-                                consequatur autem voluptate nobis! Eaque
-                                accusantium, facere maiores sit nihil quia
-                                asperiores velit dolores, blanditiis nobis sequi
-                                ratione esse.
+                                {{ entity.description }}
                             </p>
                             <div
                                 class="mt-4 text-sm leading-6 col-start-1 sm:col-span-2 lg:mt-6 lg:row-start-5 lg:col-span-1 dark:text-slate-400"
@@ -229,6 +224,18 @@ defineProps({
                                 >
                                     Categories:
                                 </h6>
+
+                                <Link
+                                    v-for="(cat, i) in entity.categories"
+                                    class="bg-indigo-400 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full mb-2 mr-2"
+                                    :key="i"
+                                    :href="route('category.show', cat.id)"
+                                    method="get"
+                                    as="button"
+                                    type="button"
+                                    >{{ cat.name }}</Link
+                                >
+
                                 <div class="mapouter">
                                     <div class="gmap_canvas">
                                         <iframe
@@ -243,16 +250,6 @@ defineProps({
                                         <br />
                                     </div>
                                 </div>
-                                <Link
-                                    v-for="(cat, i) in entity.categories"
-                                    class="bg-indigo-400 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full mb-2 mr-2"
-                                    :key="i"
-                                    :href="route('category.show', cat.id)"
-                                    method="get"
-                                    as="button"
-                                    type="button"
-                                    >{{ cat.name }}</Link
-                                >
                             </div>
                         </div>
                     </div>
@@ -260,7 +257,11 @@ defineProps({
                 <!-- .Columna 1 end.. -->
                 <!--Columna 2-->
                 <div class="shadow-xl">
-                    <div ref="post_form_container" v-if="userCanEdit" class="mb-2">
+                    <div
+                        ref="post_form_container"
+                        v-if="userCanEdit"
+                        class="mb-2"
+                    >
                         <post-form :entity="entity" />
                     </div>
                     {{ leftColumnHeight }}
@@ -313,7 +314,7 @@ export default {
             return document.getElementById("left_column");
         },
         userCanEdit() {
-            return this.entity.user_id == this.$page.props?.user?.id ;
+            return this.entity.user_id == this.$page.props?.user?.id;
         },
         entityLocation() {
             if (
@@ -339,7 +340,7 @@ export default {
             const photo = this.$refs.photoInput.files[0];
             // falta validar img type y etc
             if (!photo) return;
-            const blob = await ImgResize(photo, 1, 250, 250); // Resize IMG, RATIO, MAX_WIDTH, MAX_HEIGHT
+            const blob = await ImgResize(photo, 1, 400, 400); // Resize IMG, RATIO, MAX_WIDTH, MAX_HEIGHT
             this.form.file = blob;
             this.$refs.photoPreview.src = URL.createObjectURL(blob);
             this.form.post(route("entity.profilepic.store"), {

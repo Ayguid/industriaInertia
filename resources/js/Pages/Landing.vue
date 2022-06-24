@@ -190,13 +190,4 @@ export default {
     },
 };
 </script>
-<style>
-textarea:focus,
-.vue-treeselect--multi .vue-treeselect__input:focus {
-    border: 0;
-    box-shadow: none;
-}
-::placeholder {
-    /*color: #333 !important;*/
-}
-</style>
+<style></style>

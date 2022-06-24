@@ -46,7 +46,7 @@ class Entity extends Model
     ];
 
     //protected $appends = ['location'];
-    protected $with = ['user'];
+    //protected $with = ['user'];
     protected $appends = ['background_photo_path_full_url', 'profile_photo_path_full_url'];
 
     public function categories()

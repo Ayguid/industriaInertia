@@ -1,0 +1,316 @@
+id,parent_id,name,parent_category
+1,,Procesos,null
+2,1,Corte,Procesos
+3,1,Transformación,Procesos
+4,1,Unión,Procesos
+5,1,Terminación,Procesos
+6,2,"Electroerosión, Mecanizado por Descarga Eléctrica, EDM, MDE",Corte
+7,2,Mecánico,Corte
+8,2,Químico,Corte
+9,2,Térmico,Corte
+10,6,"Electroersión por Electrodo de Hilo Metálico, Electroerosión por Alambre","Electroerosión, Mecanizado por Descarga Eléctrica, EDM, MDE"
+11,6,"Ram EDM, Electroerosión por Ariete","Electroerosión, Mecanizado por Descarga Eléctrica, EDM, MDE"
+12,7,Corte de Vidrio,Mecánico
+13,7,"Corte por Agua, Corte por Chorro de Agua",Mecánico
+14,7,Punzonado,Mecánico
+15,7,Troquelado,Mecánico
+16,8,Mecanizado Fotomecánico,Químico
+17,9,Corte Láser,Térmico
+18,3,Alfarería,Transformación
+19,3,"BMC, Compuesto de Moldeo Volumétrico",Transformación
+20,3,Bobinado de Filamentos,Transformación
+21,3,Cilindrado,Transformación
+22,3,"Conformado con Rodillos, Formado con Rodillos",Transformación
+23,3,Conformado por Golpe,Transformación
+24,3,"Conformado Superplástico, Superformado",Transformación
+25,3,Curvado con Vapor,Transformación
+26,3,Curvado de Tubos,Transformación
+27,3,"DMC, Compuesto de Moldeo de Masa",Transformación
+28,3,"Electroconformado, Electroformado",Transformación
+29,3,Embutido,Transformación
+30,3,Estampado,Transformación
+31,3,Estirado,Transformación
+32,3,Forjado,Transformación
+33,3,Formado con Rodillos,Transformación
+34,3,Fundición,Transformación
+35,3,Hidroformado,Transformación
+36,3,Laminado de Compuestos,Transformación
+37,3,Laminado de Madera,Transformación
+38,3,Laminado Térmico 3D,Transformación
+39,3,"Maquinado en CNC, Maquinado por Control Numérico",Transformación
+40,3,Moldeo de Pulpa de Papel,Transformación
+41,3,Moldeo por Colada en Vacío,Transformación
+42,3,Moldeo por Compresión,Transformación
+43,3,Moldeo por Extrusión,Transformación
+44,3,Moldeo por Inmersión,Transformación
+45,3,Moldeo por Inyección,Transformación
+46,3,Moldeo por Inyección a Reacción,Transformación
+47,3,Moldeo por Soplado,Transformación
+48,3,"Plegado de Chapa Metálica, Doblado de Chapa Metálica",Transformación
+49,3,Prototipado Rápido,Transformación
+50,3,Pultrusión,Transformación
+51,3,Repujado,Transformación
+52,3,Rotomoldeo,Transformación
+53,3,"SMC, Compuesto de Moldeo de Láminas",Transformación
+54,3,Soplado de Vidrio,Transformación
+55,3,Termoformado,Transformación
+56,3,Trefilado,Transformación
+57,18,Modelado a Mano,Alfarería
+58,18,Modelado a Torno,Alfarería
+59,18,"Modelado al Vaciado, Colada en Molde",Alfarería
+60,18,Moldeo por Compresión y Rotación,Alfarería
+61,18,"Moldeo por Presión, Moldeo por Compresión",Alfarería
+62,23,Aplanado,Conformado por Golpe
+63,23,"Concaveado, abombado, embombado",Conformado por Golpe
+64,23,Doblado con Rodillos,Conformado por Golpe
+65,23,Persecución de Plantilla,Conformado por Golpe
+66,25,Curvado Abierto,Curvado con Vapor
+67,25,Curvado Circular,Curvado con Vapor
+68,26,Curvado de Tubos con Mandril,Curvado de Tubos
+69,26,Curvado de Tubos con Rodillos,Curvado de Tubos
+70,32,"Forjado con Estampa, Forjado por Estampado, Forja con Estampa",Forjado
+71,32,Forjado con Rodillos,Forjado
+72,34,Fundición a Baja Presión,Fundición
+73,34,Fundición Centrifugada,Fundición
+74,34,Fundición en Coquilla,Fundición
+75,34,"Fundición por Inyección, Inyección de Metales",Fundición
+76,34,Fundición Prensada,Fundición
+77,34,"Microfusión, Moldeo a la Cera Perdida",Fundición
+78,34,Moldeo en Arena,Fundición
+79,34,Moldeo en Arena Matchplate,Fundición
+80,34,Moldeo en Arena Químico,Fundición
+81,34,Moldeo en Arena Seca,Fundición
+82,34,Moldeo en Arena Verde,Fundición
+83,34,Moldeo Horizontal,Fundición
+84,34,Moldeo Mecánico,Fundición
+85,34,Moldeo Vertical,Fundición
+86,36,Laminado húmedo,Laminado de Compuestos
+87,36,Moldeo por Transferencia de Resina,Laminado de Compuestos
+88,36,"Preimpregnados, Laminado Pre-preg",Laminado de Compuestos
+89,37,Kerfing,Laminado de Madera
+90,37,Laminado de Chapa de Madera,Laminado de Madera
+91,37,Laminado de Madera Solida,Laminado de Madera
+92,38,"Laminado 3D, 3DL",Laminado Térmico 3D
+93,38,"Laminado Rotativo 3D, 3Dr",Laminado Térmico 3D
+94,42,Moldeo por Compresión de Elastómeros,Moldeo por Compresión
+95,42,Moldeo por Compresión de Plásticos,Moldeo por Compresión
+96,43,Coextrusión,Moldeo por Extrusión
+97,43,Extrusión de Metales,Moldeo por Extrusión
+98,43,Extrusión de Película Soplada,Moldeo por Extrusión
+99,43,Extrusión de Plásticos,Moldeo por Extrusión
+100,45,"Coinyección, Inyección Multicomponente, Inyección Multi Shot, Inyección Multimaterial",Moldeo por Inyección
+101,45,Decoración en Molde,Moldeo por Inyección
+102,45,Inyección Asistida por Agua,Moldeo por Inyección
+103,45,Inyección Asistida por Gas,Moldeo por Inyección
+104,45,Inyección de Plásticos,Moldeo por Inyección
+105,45,Inyección de Termoestables,Moldeo por Inyección
+106,47,Moldeo por estirado-soplado,Moldeo por Soplado
+107,47,Moldeo por extrusión-soplado,Moldeo por Soplado
+108,47,Moldeo por inyección-soplado,Moldeo por Soplado
+109,49,"Estereolitografía, SLA",Prototipado Rápido
+110,49,"Sinterizado Directo de Metales, DMLS",Prototipado Rápido
+111,49,"Sinterizado Selectivo por Láser, SLS",Prototipado Rápido
+112,54,Soplado en Molde,Soplado de Vidrio
+113,54,Soplado Libre,Soplado de Vidrio
+114,54,Soplado Mecánico,Soplado de Vidrio
+115,54,Vidrio con Soplete,Soplado de Vidrio
+116,55,Conformado con Macho,Termoformado
+117,55,Conformado por Molde Coincidente,Termoformado
+118,55,Conformado por Vacío con Núcleo de Ayuda,Termoformado
+119,55,Termoformado por Vacío Directo,Termoformado
+120,56,Deformado de Tubos Hidráulico,Trefilado
+121,56,"Reducción por Rotación, Reducción Rotatoria de la Sección",Trefilado
+122,4,Mecánica,Unión
+123,4,Térmica,Unión
+124,122,"Ensambladura, Juntas",Mecánica
+125,122,Entramado de Madera,Mecánica
+126,122,Tapicería,Mecánica
+127,122,Tejido,Mecánica
+128,123,Power Beam Welding,Térmica
+129,123,Remachado,Térmica
+130,123,Remachado en Caliente,Térmica
+131,123,Soldadura Blanda,Térmica
+132,123,Soldadura Manual por Arco,Térmica
+133,123,"Soldadura por Arco Sumergido, SAW",Térmica
+134,123,Soldadura por Fricción,Térmica
+135,123,"Soldadura por Gas Inerte Metal, MIG",Térmica
+136,123,"Soldadura por Gas Inerte Tungsteno, TIG",Térmica
+137,123,Soldadura por Plasma,Térmica
+138,123,Soldadura por Plato Caliente,Térmica
+139,123,Soldadura por Resistencia,Térmica
+140,123,Soldadura por Ultrasonido,Térmica
+141,123,Soldadura por Vibración,Térmica
+142,5,Aditivo,Terminación
+143,5,Impresión,Terminación
+144,5,Substractivo,Terminación
+145,142,Anodizado,Aditivo
+146,142,Galvanizado,Aditivo
+147,142,Galvanoplastia,Aditivo
+148,142,Metalizado por Alto Vacio,Aditivo
+149,142,Pintura con Pistola,Aditivo
+150,142,Pulverización Electrostática,Aditivo
+151,142,"Recubrimiento en Lecho Fluidizado, Inmersión en Lecho Fluidizado",Aditivo
+152,143,"Hot Stamping, Foil Stamping",Impresión
+153,143,"Impresión por Transferencia de Agua, Impresión Hidrográfica, Hidroimpresión, Hidrotransferencia",Impresión
+154,143,Serigrafía,Impresión
+155,143,Tampografía,Impresión
+156,144,Acabado Vibratorio,Substractivo
+157,144,"Afilación, Afilado",Substractivo
+158,144,Arenado,Substractivo
+159,144,Disco Abrasivo De Corte,Substractivo
+160,144,Electropulido,Substractivo
+161,144,Grabado CNC,Substractivo
+162,144,Lapeado,Substractivo
+163,144,Lijado de banda,Substractivo
+164,144,Mecanizado Fotoquímico (PCM),Substractivo
+165,144,Pulido con Disco Diamantado,Substractivo
+166,144,Pulido Manual,Substractivo
+167,,Materiales,null
+168,167,Termoplásticos,Materiales
+169,167,Termoestables,Materiales
+170,167,Bioplásticos,Materiales
+171,167,Caucho,Materiales
+172,167,Metales,Materiales
+173,167,Maderas,Materiales
+174,167,Aglomerados,Materiales
+175,167,Vidrios,Materiales
+176,167,Cerámicas,Materiales
+177,167,Textiles,Materiales
+178,167,Pieles,Materiales
+179,168,Plástico,Termoplásticos
+180,168,Elastómero Termoplástico (TPE),Termoplásticos
+181,179,Poliolefina,Plástico
+182,179,Poliamida (PA),Plástico
+183,181,Polipropileno (PP),Poliolefina
+184,181,Polietileno (PE),Poliolefina
+185,184,Polietileno de alta densidad (HDPE),Polietileno (PE)
+186,184,Polietileno de ultra alta densidad (UHDPE),Polietileno (PE)
+187,184,Polietileno de baja densidad (LDPE),Polietileno (PE)
+188,184,Polietileno de ultra baja densidad (ULDPE),Polietileno (PE)
+189,184,Polietileno lineal de baja densidad (LLDPE),Polietileno (PE)
+190,181,Etilvinilacetato (EVA),Poliolefina
+191,179,Polietileno Tereftalato (PET),Plástico
+192,179,(PETG),Plástico
+193,179,Policloruro de vinilo (PVC),Plástico
+194,179,Polibutileno (PB),Plástico
+195,179,Poliestireno (PS),Plástico
+196,182,Nailon,Poliamida (PA)
+197,182,Kevlar,Poliamida (PA)
+198,182,Nomex,Poliamida (PA)
+199,182,Urea formaldehído,Poliamida (PA)
+200,179,Polimetilmetacrilato (PMMA),Plástico
+201,179,Teflón (PTFE),Plástico
+202,179,Policarbonato (PC),Plástico
+203,179,Acrilonitrilo butadieno estireno (ABS),Plástico
+204,179,Poliestireno de Alto Impacto (HIPS),Plástico
+205,180,Poliuretano Termoplástico (TPU),Elastómero Termoplástico (TPE)
+206,167,Piedra,Materiales
+207,206,Mármol,Piedra
+208,206,Granito,Piedra
+209,7,Aserradero,Mecánico
+210,144,Tren de lustre,Substractivo
+211,180,Windform®,Elastómero Termoplástico (TPE)
+212,180,Santoprene,Elastómero Termoplástico (TPE)
+213,169,Elastómero,Termoestables
+214,213,Caucho Sintético,Elastómero
+215,213,Caucho Natural,Elastómero
+216,215,Latex Natural,Caucho Natural
+217,215,Caucho Natural Vulcanizado,Caucho Natural
+218,214,Silicona,Caucho Sintético
+219,214,Bromobutil,Caucho Sintético
+220,214,Buna CB,Caucho Sintético
+221,214,"Clorobutil, Butil",Caucho Sintético
+222,214,"Cloropreno, Neopreno",Caucho Sintético
+223,214,Hypalon,Caucho Sintético
+224,214,"ECO, Epiclorohidrina, Epicloro, Epicloridrina, Herclor, Hidrina",Caucho Sintético
+225,214,"Caucho etileno-propileno-dieno, Nordel",Caucho Sintético
+226,214,"Viton, Kalrez, Fluorel, Chemraz",Caucho Sintético
+227,214,"FMQ, Caucho de silicona",Caucho Sintético
+228,214,HNBR,Caucho Sintético
+229,214,Caucho natural (Sintético),Caucho Sintético
+230,214,Butil,Caucho Sintético
+231,214,"NBR, Caucho de Nitrilo, Perbunan, Buna-N",Caucho Sintético
+232,214,Poliuretano Termoestable (PU) (PUR),Caucho Sintético
+233,232,Viscoelástico,Poliuretano Termoestable (PU) (PUR)
+234,233,Viscoelástico Espumado,Viscoelástico
+235,233,Viscoelástico Moldeado,Viscoelástico
+236,232,Poliuretano HR,Poliuretano Termoestable (PU) (PUR)
+237,232,Elastómeros de Poliuretano de Colada,Poliuretano Termoestable (PU) (PUR)
+238,232,Elastómeros de Poliuretano Prensado,Poliuretano Termoestable (PU) (PUR)
+239,232,Elastómeros de Poliuretano Celular / Espuma de Poliuretano,Poliuretano Termoestable (PU) (PUR)
+240,232,Poliuretanos Rígidos (PIR),Poliuretano Termoestable (PU) (PUR)
+241,232,Poliuretano Termoestable (PUR) Muy Buena Adhesión,Poliuretano Termoestable (PU) (PUR)
+242,232,Poliuretano Termoestable (PUR) Buena Adhesión,Poliuretano Termoestable (PU) (PUR)
+243,232,Poliuretano Termoestable (PUR) Superficie Rugosa,Poliuretano Termoestable (PU) (PUR)
+244,232,Poliuretano Termoestable (PUR) Llama Protegida,Poliuretano Termoestable (PU) (PUR)
+245,232,Poliuretano Termoestable (PUR) Sin Halógenos,Poliuretano Termoestable (PU) (PUR)
+246,214,Caucho Estireno-Butadieno (SBR) (GRS) Buna-S,Caucho Sintético
+247,214,Caucho de Solución Estireno-Butadieno (S-SBR) Buna VSL,Caucho Sintético
+248,214,Caucho Estireno-Etileno-Butileno-Estireno (SEBS),Caucho Sintético
+249,214,Caucho de Silicona,Caucho Sintético
+250,214,Caucho de Nitrilo (NBR) Buna-N,Caucho Sintético
+251,214,Caucho de Nitrilo Carboxilado (XNBR),Caucho Sintético
+252,,Ionómero,
+253,,,
+254,,,
+255,,,
+256,,,
+257,,,
+258,,,
+259,,,
+260,,,
+261,,,
+262,,,
+263,,,
+264,,,
+265,,,
+266,,,
+267,,,
+268,,,
+269,,,
+270,,,
+271,,,
+272,,,
+273,,,
+274,,,
+275,,,
+276,,,
+277,,,
+278,,,
+279,,,
+280,,,
+281,,,
+282,,,
+283,,,
+284,,,
+285,,,
+286,,,
+287,,,
+288,,,
+289,,,
+290,,,
+291,,,
+292,,,
+293,,,
+294,,,
+295,,,
+296,,,
+297,,,
+298,,,
+299,,,
+300,,,
+301,,,
+302,,,
+303,,,
+304,,,
+305,,,
+306,,,
+307,,,
+308,,,
+309,,,
+310,,,
+311,,,
+312,,,
+313,,,
+314,,,
+315,,,

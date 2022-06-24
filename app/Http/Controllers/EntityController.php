@@ -54,7 +54,52 @@ class EntityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return $request;
+        return DB::transaction(function () use ($request) {
+            //validamos la data obligatoria////////////
+            $validatedData = $request->validate([
+                'username' => 'required|string|min:4|unique:entities',
+                'name' => 'required|string|min:4',
+                'description' => 'required|string|min:8',
+            ]);
+            //Creacion de entidad//////////////
+            //si el usuario no creo la entidad dejamos el user id en false/0
+            //guardamos por otro lado quien creo la entidad en, created_by 
+            $newEntity = Entity::create(
+                [
+                    'user_id' => $request['userOwnsEntity'] ? $request->user()->id : null,
+                    'created_by_user_id' => $request->user()->id,
+                    'name' => $validatedData['name'],
+                    'email' => $request['email'],
+                    'username' => $request['username'],
+                    'description' => $validatedData['description'],
+                    'phone' => $request['phone'],
+                    'cellphone' => $request['cellphone'],
+                    'country_id' => $request['country_id'] ?? null,
+                    'state_id' => $request['state_id'] ?? null,
+                    'city_id' => $request['city_id'] ?? null,
+                    //'location_id' => $request['location']['id']
+                ]
+            );
+            // si llego un array con ids de categorias en $request['catIds'], creamos las entityCategories
+            if (count($request['catIds']) > 0) {
+                $entCats = [];
+                for ($i = 0; $i < count($request['catIds']); $i++) {
+                    $entityCategory = new EntityCategory(
+                        [
+                            'category_id' => $request['catIds'][$i],
+                        ]
+                    );
+                    array_push($entCats,  $entityCategory);
+                }
+                //salvamos todas las categories para ese entity
+                $newEntity->entCats()->saveMany($entCats);
+            }
+            //devolvemos una respuesta
+            //return $newEntity;
+            //pedimos el entity devuelta porque sino no refresca las relations, bug raro
+            return Entity::where('id', $newEntity->id)->with('country', 'state', 'city')->first();
+        });
     }
 
     /**

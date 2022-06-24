@@ -52,7 +52,7 @@
                 >
                     <button
                         type="button"
-                        @click="removeMedia(index, m)"
+                        @click="removeMedia(index)"
                         class="m-1 absolute top-0 p-2 left-0 text-white bg-black bg-opacity-75 rounded-full cursor-pointer hover:bg-opacity-100"
                     >
                         <svg
@@ -69,16 +69,10 @@
                         </svg>
                     </button>
                     <img
-                        :src="m.url"
+                        :src="m"
                         alt=""
-                        class="rounded-xl object-cover h-48 w-full"
+                        class="rounded-xl object-cover w-full"
                     />
-                    <div
-                        v-if="m.loading"
-                        class="absolute bg-black bg-opacity-75 text-sm rounded px-2 text-white"
-                    >
-                        Loading...
-                    </div>
                 </div>
             </div>
 
@@ -114,7 +108,8 @@ import { useForm } from "@inertiajs/inertia-vue3";
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import "@vueup/vue-quill/dist/vue-quill.bubble.css";
-
+import { resize as ImgResize } from "@/Helpers/imageHelpers";
+//const ImgResize = () => import("@/Helpers/imageHelpers");
 export default {
     props: {
         entity: Object,
@@ -180,7 +175,7 @@ export default {
                 },
             });
         },
-        removeMedia(index, item) {
+        removeMedia(index) {
             this.media.splice(index, 1);
             this.form.media.splice(index, 1);
         },
@@ -191,19 +186,10 @@ export default {
         },
         uploadMedia(files) {
             //console.log(files);
-            Array.from(files).forEach((media) => {
-                let reader = new FileReader();
-                reader.readAsDataURL(media);
-                reader.onload = (e) => {
-                    //e.target.result
-                    let item = {
-                        id: undefined,
-                        loading: false,
-                        url: e.target.result,
-                    };
-                    this.form.media.push(media);
-                    this.media.push(item);
-                };
+            Array.from(files).forEach(async (media) => {
+                const blob = await ImgResize(media, 1, 250, 250); // Resize IMG, RATIO, MAX_WIDTH, MAX_HEIGHT
+                this.media.push(URL.createObjectURL(blob));
+                this.form.media.push(blob);
             });
         },
     },
