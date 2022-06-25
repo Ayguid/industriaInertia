@@ -20,12 +20,20 @@ class LandingController extends Controller
         $locationsIds = (request()->exists('locations')) ? array_column(json_decode(request()->get('locations')), 'id') : [];
         $entities = [];
         $paginate = 10;
+        $entities = Entity::with('categories');
         ///////////////////////////////////////////////////////////////
         /////////////// conditions of query ///////////////////////////
+        // ex locations inRequest locationsIds=locations=[{id:1,name:"algo", parent:{id:1,name:"algoParent"}},{id:1,name:"algo"}] 
+        if(count($locationsIds) > 0){
+            $entities = $entities->where(function ($query) use ($locationsIds) {
+                $query->whereIn('country_id', $locationsIds)
+                    ->orWhereIn('state_id', $locationsIds)
+                    ->orWhereIn('city_id', $locationsIds);
+            });
+        }
         // si hay categorias en el filter ,,,categoriesInReq = categories=[[1],null,[34, 60],null] 
         if (count($categoriesInReq) > 0) {
             $catsWithDescsFlat = []; // termina siendo asi [[...],[...]]
-            $entities = Entity::with('categories');
             //
             foreach ($categoriesInReq as $key => $categoryArray) {
                 //salteamos los arrays vacios categories=[[1],[]] ..enrealidad viene stringified categories=%5B%5B%5D%2C%5B206%5D%5D
@@ -33,10 +41,12 @@ class LandingController extends Controller
                     // cambiando el whereIn ....
                     $categoryAndDescsFlat = $this->flatten(Category::whereIn('id', $categoryArray)->with('children')->get()->toArray()); //[123,213,222]
                     $categoriesIds = array_column($categoryAndDescsFlat, 'id'); //[123,213,222]
-                    //
+                    // 
                     array_push($catsWithDescsFlat,  $categoriesIds); // [[123,213,222],[56,345]]
                 }
             }
+            //
+                
             //
             foreach ($catsWithDescsFlat as $ids) { // [[123,213,222],[56,345]]
                 $entities->whereHas('categories', function ($q) use ($ids) {
@@ -46,11 +56,12 @@ class LandingController extends Controller
             //
         }
         //hay nada de nada de nada
+        /*
         else if (count($categoriesInReq) == 0 && count($locationsIds) == 0) {
             $entities = new Entity(); //weird...
-        }
+        }*/
         //appendeamos las relations/methods que queremos START-->
-        $entities = $entities->with(['user', 'categories', 'country', 'state', 'city'])->withCount([
+        $entities = $entities->with(['user','country', 'state', 'city'])->withCount([
             'bookmarks',
             'bookmarks as bookmarked' => function ($q) use ($user_id) {
                 $q->where('user_id', $user_id);
@@ -59,7 +70,7 @@ class LandingController extends Controller
         //appendeamos las relations/methods que queremos END-->
         //
         //las categorias para el filtro
-        $parent_categories = Cache::remember('parent_categories', 60, function () {
+        $parent_categories = Cache::remember('parent_categories', 120, function () {//120 segundos
             return Category::where('parent_id', null)->with('children')->get();
         });
         // return final

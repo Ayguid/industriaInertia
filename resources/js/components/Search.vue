@@ -7,7 +7,7 @@
                 autocomplete="on"
                 type="text"
                 name="search"
-                placeholder="Buscar…"
+                placeholder="Buscar por tag…"
                 :value="search"
                 @input="$emit('update:search', $event.target.value)"
             />
@@ -17,7 +17,7 @@
             type="button"
             @click="$emit('delete:search')"
         >
-            Reset
+            Buscar
         </button>
     </div>
 </template>

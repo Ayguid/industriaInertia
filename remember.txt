@@ -1,6 +1,6 @@
 TODOS:
 1- rehacer la parte de users en el admin panel, userFormETc
-
+2- Para deploy en local network, ipconfig,cambiar en el env,APP_URL a ese ip, despues , php artisan serve --host={ip} --port=8000
 
 
 

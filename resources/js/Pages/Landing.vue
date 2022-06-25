@@ -20,6 +20,8 @@
                     <treeselect
                         :placeholder="category.name"
                         :multiple="true"
+                        :flat="true"
+                        :autoDeselectDescendants="true"
                         :options="category.children"
                         :normalizer="normalizer"
                         v-model="selectedCats[i]"

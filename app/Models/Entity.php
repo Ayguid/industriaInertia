@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Storage;
 class Entity extends Model
 {
     use HasFactory;
+    //tags
+    use \Conner\Tagging\Taggable;
 
     protected $fillable = [
         'created_by_user_id',

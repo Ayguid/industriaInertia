@@ -122,12 +122,13 @@ class EntityController extends Controller
         ])->withCasts(['bookmarked' => 'boolean'])->with(['country', 'state', 'city',]);
         //
         $entity = $entity->with(['categories'])->first();
+        //$entity->tag('Gardening'); ej de como crear tag
         $posts = $entity->posts()->paginate($paginate);
 
         if (request()->wantsJson()) { // si es req via ajax
             return $posts;
         }
-
+        
         return Inertia::render('EntityProfile', [
             'entity' => $entity,
             'posts' => $posts
