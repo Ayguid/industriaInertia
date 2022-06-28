@@ -15,13 +15,17 @@
             <div
                 class="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 gap-4"
             >
-                <!--Categories Start :options="[category]"-->
+                <!--
+                        :options="[category]"                         
+                        :flat="true"
+                        :autoDeselectDescendants="true"
+                        :autoDeselectAncestors="true"
+                        :autoSelectDescendants="false"
+                -->
                 <div class="mb-2" v-for="(category, i) in categories" :key="i">
                     <treeselect
                         :placeholder="category.name"
                         :multiple="true"
-                        :flat="true"
-                        :autoDeselectDescendants="true"
                         :options="category.children"
                         :normalizer="normalizer"
                         v-model="selectedCats[i]"
